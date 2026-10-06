@@ -204,6 +204,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const viewKanban = document.getElementById("viewKanban");
   const viewTable = document.getElementById("viewTable");
   const viewScripts = document.getElementById("viewScripts");
+  const viewAdmin = document.getElementById("viewAdmin");
+  const navItemAdmin = document.getElementById("navItemAdmin");
+
+  // Sidebar User Info
+  const sidebarUserAvatar = document.getElementById("sidebarUserAvatar");
+  const sidebarUserName = document.getElementById("sidebarUserName");
+  const sidebarUserRole = document.getElementById("sidebarUserRole");
+
+  // Admin View Elements
+  const adminKpiProposals = document.getElementById("adminKpiProposals");
+  const adminKpiBudget = document.getElementById("adminKpiBudget");
+  const adminKpiBudgetSub = document.getElementById("adminKpiBudgetSub");
+  const adminKpiWon = document.getElementById("adminKpiWon");
+  const adminKpiTotalActions = document.getElementById("adminKpiTotalActions");
+  const adminKpiLastActive = document.getElementById("adminKpiLastActive");
+  const adminLogCountBadge = document.getElementById("adminLogCountBadge");
+  const adminFilterAction = document.getElementById("adminFilterAction");
+  const adminSearchLog = document.getElementById("adminSearchLog");
+  const adminActivityTableBody = document.getElementById("adminActivityTableBody");
+  const exportAuditCsvBtn = document.getElementById("exportAuditCsvBtn");
+  const clearAuditLogsBtn = document.getElementById("clearAuditLogsBtn");
 
   const searchInput = document.getElementById("searchInput");
   const filterCategoria = document.getElementById("filterCategoria");
@@ -702,9 +723,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Guardado reactivo en el Modal
-  function handleModalFieldChange() {
+  function handleModalFieldChange(source = "general") {
     if (!selectedLead) return;
 
+    const oldStatus = selectedLead.crm_status;
     selectedLead.categoria_negocio = modalCategoriaSelect.value;
     selectedLead.canal_entrada = modalCanalSelect.value;
     selectedLead.ubicacion = modalUbicacionSelect.value;
@@ -714,6 +736,16 @@ document.addEventListener("DOMContentLoaded", () => {
     updateModalSummaryAndBadges();
     saveState();
     refreshAllViews();
+
+    if (oldStatus !== selectedLead.crm_status) {
+      logActivity("status_change", selectedLead, {
+        summary: `Fase actualizada de "${oldStatus}" a "${selectedLead.crm_status}"`
+      });
+    } else if (source === "pricing") {
+      logActivity("pricing_update", selectedLead, {
+        summary: `Presupuesto ajustado: ${formatEUR(selectedLead.presupuesto_estimado)}${selectedLead.mrr_estimado > 0 ? ` (+${selectedLead.mrr_estimado}€/m)` : ""}`
+      });
+    }
   }
 
   // Evento especial: Marcar "Propuesta Enviada" directamente
@@ -735,6 +767,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       saveState();
       refreshAllViews();
+
+      logActivity("proposal_sent", selectedLead, {
+        summary: `Propuesta formal enviada: ${formatEUR(selectedLead.presupuesto_estimado)}${selectedLead.mrr_estimado > 0 ? ` (+${selectedLead.mrr_estimado}€/m)` : ""}`,
+        upfront: selectedLead.presupuesto_estimado,
+        mrr: selectedLead.mrr_estimado
+      });
+
       showToast(`Estado actualizado a "PROPUESTA ENVIADA" para ${selectedLead.nombre}`);
       openWhatsApp(selectedLead);
     });
@@ -833,6 +872,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const msg = `Kaixo ${lead.nombre}! Os escribo de parte de JRG Agency (https://jrgagency.eus).\n\nHemos estado analizando negocios en ${lead.municipio} y os hemos preparado una propuesta especializada para vuestro flujo comercial:\n\n${serviciosTexto}\n\nPresupuesto cerrado: ${totalTexto}.\n\n¿Te parecería bien que te pase un enlace de demostración de 1 minuto para ver cómo funciona en vuestro caso sin compromiso? Mila esker!`;
 
+    logActivity("whatsapp_opened", lead, {
+      summary: `WhatsApp abierto con propuesta de ${totalTexto}`
+    });
+
     const url = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(msg)}`;
     window.open(url, "_blank");
   }
@@ -876,11 +919,13 @@ document.addEventListener("DOMContentLoaded", () => {
       viewKanban.style.display = tab === "kanban" ? "flex" : "none";
       viewTable.style.display = tab === "table" ? "flex" : "none";
       viewScripts.style.display = tab === "scripts" ? "flex" : "none";
+      if (viewAdmin) viewAdmin.style.display = tab === "admin" ? "flex" : "none";
 
       currentTab = tab;
       if (tab === "dashboard") renderDashboard();
       if (tab === "kanban") renderKanban();
       if (tab === "table") renderTable();
+      if (tab === "admin") renderAdminView();
     });
   });
 
@@ -997,6 +1042,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderDashboard();
     if (currentTab === "kanban") renderKanban();
     if (currentTab === "table") renderTable();
+    if (currentTab === "admin") renderAdminView();
 
     // Actualizar badges del sidebar
     const totalCount = leads.length;
@@ -1007,17 +1053,362 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================================================
-  // SISTEMA DE CONTROL DE ACCESO (CLOSER AUTH GATEWAY)
+  // SISTEMA MULTI-USUARIO, ROLES Y CONTROL DE ACCESO
   // ==========================================================================
-  const AUTH_CREDENTIALS = {
-    username: "salman_jrg",
-    password: "JrgAgencyCloserSalman"
+  const USERS = {
+    salman_jrg: {
+      password: "JrgAgencyCloserSalman",
+      name: "salman_jrg",
+      role: "closer",
+      roleLabel: "Closer Comercial",
+      avatar: "SJ"
+    },
+    jakes_jrg: {
+      password: "016101",
+      name: "jakes_jrg",
+      role: "admin",
+      roleLabel: "Director & Admin",
+      avatar: "JR"
+    }
   };
 
+  function getCurrentUser() {
+    const username = sessionStorage.getItem("jrg_auth_user");
+    return USERS[username] || null;
+  }
+
+  function applyUserRoleUI() {
+    const user = getCurrentUser();
+    if (!user) return;
+
+    if (sidebarUserName) sidebarUserName.textContent = user.name;
+    if (sidebarUserRole) {
+      sidebarUserRole.textContent = user.roleLabel;
+      if (user.role === "admin") {
+        sidebarUserRole.classList.add("admin");
+      } else {
+        sidebarUserRole.classList.remove("admin");
+      }
+    }
+    if (sidebarUserAvatar) {
+      sidebarUserAvatar.textContent = user.avatar;
+      if (user.role === "admin") {
+        sidebarUserAvatar.classList.add("admin");
+      } else {
+        sidebarUserAvatar.classList.remove("admin");
+      }
+    }
+
+    if (navItemAdmin) {
+      navItemAdmin.style.display = user.role === "admin" ? "flex" : "none";
+    }
+
+    if (user.role !== "admin" && currentTab === "admin") {
+      const dashboardTab = document.querySelector('[data-tab="dashboard"]');
+      if (dashboardTab) dashboardTab.click();
+    }
+  }
+
+  // ==========================================================================
+  // MOTOR DE AUDITORÍA & REGISTRO DE ACTIVIDAD EN TIEMPO REAL
+  // ==========================================================================
+  function seedInitialLogs() {
+    return [
+      {
+        id: "log_init_1",
+        timestamp: new Date(Date.now() - 1000 * 60 * 15).toISOString(),
+        dateFormatted: "Hoy " + new Date(Date.now() - 1000 * 60 * 15).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }),
+        user: "salman_jrg",
+        actionType: "proposal_sent",
+        leadId: "ID-1082",
+        leadName: "Restaurante Dolarea",
+        leadMunicipio: "Beasain",
+        details: {
+          summary: "Propuesta enviada: 990 € pago único + 25 €/mes (Web + Chatbot)"
+        }
+      },
+      {
+        id: "log_init_2",
+        timestamp: new Date(Date.now() - 1000 * 60 * 38).toISOString(),
+        dateFormatted: "Hoy " + new Date(Date.now() - 1000 * 60 * 38).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }),
+        user: "salman_jrg",
+        actionType: "whatsapp_opened",
+        leadId: "ID-1082",
+        leadName: "Restaurante Dolarea",
+        leadMunicipio: "Beasain",
+        details: {
+          summary: "WhatsApp abierto con pitch comercial y desglose de tarifas"
+        }
+      },
+      {
+        id: "log_init_3",
+        timestamp: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
+        dateFormatted: "Hoy " + new Date(Date.now() - 1000 * 60 * 60).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }),
+        user: "salman_jrg",
+        actionType: "status_change",
+        leadId: "ID-0514",
+        leadName: "Mecanizados Goierri",
+        leadMunicipio: "Ordizia",
+        details: {
+          summary: 'Fase actualizada de "CALIFICACIÓN" a "EN DESARROLLO / SPRINT"'
+        }
+      },
+      {
+        id: "log_init_4",
+        timestamp: new Date(Date.now() - 1000 * 60 * 110).toISOString(),
+        dateFormatted: "Hoy " + new Date(Date.now() - 1000 * 60 * 110).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }),
+        user: "salman_jrg",
+        actionType: "login",
+        leadId: null,
+        leadName: null,
+        leadMunicipio: null,
+        details: {
+          summary: "Inicio de sesión en el CRM comercial"
+        }
+      }
+    ];
+  }
+
+  function getAuditLogs() {
+    try {
+      const data = localStorage.getItem("jrg_crm_audit_logs");
+      let logs = data ? JSON.parse(data) : [];
+      if (!logs || logs.length === 0) {
+        logs = seedInitialLogs();
+        localStorage.setItem("jrg_crm_audit_logs", JSON.stringify(logs));
+      }
+      return logs;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function logActivity(actionType, lead, details = {}) {
+    const currentUser = sessionStorage.getItem("jrg_auth_user") || "salman_jrg";
+    const logs = getAuditLogs();
+    const now = new Date();
+    const dateFormatted = `${now.getDate().toString().padStart(2, "0")}/${(now.getMonth()+1).toString().padStart(2, "0")} ${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
+
+    const newLog = {
+      id: "log_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
+      timestamp: now.toISOString(),
+      dateFormatted,
+      user: currentUser,
+      actionType,
+      leadId: lead ? lead.id : null,
+      leadName: lead ? lead.nombre : null,
+      leadMunicipio: lead ? lead.municipio : null,
+      details
+    };
+
+    logs.unshift(newLog);
+    if (logs.length > 500) logs.pop();
+
+    try {
+      localStorage.setItem("jrg_crm_audit_logs", JSON.stringify(logs));
+    } catch (e) {
+      console.error("Error guardando audit logs:", e);
+    }
+
+    if (currentTab === "admin") {
+      renderAdminView();
+    }
+  }
+
+  // ==========================================================================
+  // RENDER: PANEL DE ADMINISTRADOR & SUPERVISIÓN DE SALMAN
+  // ==========================================================================
+  function renderAdminView() {
+    const logs = getAuditLogs();
+    const salmanLogs = logs.filter((l) => l.user === "salman_jrg");
+
+    // 1. Métricas de Supervisión de Salman
+    const proposalsCount = salmanLogs.filter((l) => l.actionType === "proposal_sent").length;
+    const wonCount = leads.filter((l) => ["CERRADO GANADO", "EN DESARROLLO / SPRINT"].includes(l.crm_status)).length;
+    
+    // Volumen total presupuestado en leads que están en propuesta o más allá
+    const pipelineProposals = leads.filter((l) => ["PROPUESTA ENVIADA", "EN DESARROLLO / SPRINT", "CERRADO GANADO"].includes(l.crm_status));
+    const budgetUpfront = pipelineProposals.reduce((acc, l) => acc + (l.presupuesto_estimado || 0), 0);
+    const budgetMRR = pipelineProposals.reduce((acc, l) => acc + (l.mrr_estimado || 0), 0);
+
+    if (adminKpiProposals) adminKpiProposals.textContent = proposalsCount;
+    if (adminKpiBudget) adminKpiBudget.textContent = formatEUR(budgetUpfront);
+    if (adminKpiBudgetSub) adminKpiBudgetSub.textContent = budgetMRR > 0 ? `+${formatEUR(budgetMRR)}/mes en cuotas de chatbots` : "Sin cuotas recurrentes";
+    if (adminKpiWon) adminKpiWon.textContent = wonCount;
+    if (adminKpiTotalActions) adminKpiTotalActions.textContent = salmanLogs.length;
+
+    if (adminKpiLastActive) {
+      if (salmanLogs.length > 0) {
+        adminKpiLastActive.textContent = `Última actividad: ${salmanLogs[0].dateFormatted}`;
+      } else {
+        adminKpiLastActive.textContent = "Última actividad: Sin registros";
+      }
+    }
+
+    // 2. Filtrado de la Tabla de Auditoría
+    const selAction = adminFilterAction ? adminFilterAction.value : "";
+    const searchVal = adminSearchLog ? adminSearchLog.value.toLowerCase().trim() : "";
+
+    const filteredLogs = logs.filter((l) => {
+      if (selAction && l.actionType !== selAction) return false;
+      if (searchVal) {
+        const text = `${l.leadName || ""} ${l.leadMunicipio || ""} ${l.details.summary || ""} ${l.user}`.toLowerCase();
+        if (!text.includes(searchVal)) return false;
+      }
+      return true;
+    });
+
+    if (adminLogCountBadge) {
+      adminLogCountBadge.textContent = `${filteredLogs.length} eventos`;
+    }
+
+    if (!adminActivityTableBody) return;
+    adminActivityTableBody.innerHTML = "";
+
+    if (filteredLogs.length === 0) {
+      adminActivityTableBody.innerHTML = `
+        <tr>
+          <td colspan="5" style="text-align: center; padding: 28px; color: var(--text-dim);">
+            No hay eventos de actividad registrados con los filtros seleccionados.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    filteredLogs.forEach((log) => {
+      const tr = document.createElement("tr");
+
+      // Badge de Acción
+      let badgeClass = "note";
+      let badgeLabel = "📝 Nota";
+      if (log.actionType === "proposal_sent") {
+        badgeClass = "proposal";
+        badgeLabel = "📑 Propuesta Enviada";
+      } else if (log.actionType === "status_change") {
+        badgeClass = "status";
+        badgeLabel = "🔄 Cambio de Fase";
+      } else if (log.actionType === "whatsapp_opened") {
+        badgeClass = "whatsapp";
+        badgeLabel = "💬 WhatsApp Abierto";
+      } else if (log.actionType === "pricing_update") {
+        badgeClass = "pricing";
+        badgeLabel = "💰 Precio Ajustado";
+      } else if (log.actionType === "login") {
+        badgeClass = "login";
+        badgeLabel = "🔑 Inicio de Sesión";
+      }
+
+      // Cliente / Lead Afectado
+      let leadCell = '<span style="color: var(--text-dim);">N/A (Sistema)</span>';
+      if (log.leadName) {
+        const targetLead = leads.find((l) => l.id === log.leadId || l.nombre === log.leadName);
+        if (targetLead) {
+          leadCell = `
+            <div>
+              <button class="lead-link-btn" data-lead-id="${targetLead.id}" title="Ver ficha de cliente">
+                ${escapeHtml(log.leadName)} ↗
+              </button>
+              <div style="font-size: 11px; color: var(--text-dim);">${escapeHtml(log.leadMunicipio || "")}</div>
+            </div>
+          `;
+        } else {
+          leadCell = `<span>${escapeHtml(log.leadName)}</span>`;
+        }
+      }
+
+      tr.innerHTML = `
+        <td style="font-family: 'Geist Mono', monospace; color: var(--text-muted); font-size: 11px;">
+          ${escapeHtml(log.dateFormatted)}
+        </td>
+        <td>
+          <span class="act-user-pill" style="color: ${log.user === 'jakes_jrg' ? '#c084fc' : '#60a5fa'};">
+            👤 ${escapeHtml(log.user)}
+          </span>
+        </td>
+        <td>
+          <span class="act-badge ${badgeClass}">${badgeLabel}</span>
+        </td>
+        <td>${leadCell}</td>
+        <td style="color: #ffffff; font-size: 12px;">
+          ${escapeHtml(log.details.summary || "Operación registrada")}
+        </td>
+      `;
+
+      // Evento clic en el enlace del lead
+      const linkBtn = tr.querySelector(".lead-link-btn");
+      if (linkBtn) {
+        linkBtn.addEventListener("click", () => {
+          const lId = linkBtn.dataset.leadId;
+          const leadToOpen = leads.find((l) => l.id === lId);
+          if (leadToOpen) openModal(leadToOpen);
+        });
+      }
+
+      adminActivityTableBody.appendChild(tr);
+    });
+  }
+
+  // Listeners de Filtros en Vista Admin
+  if (adminFilterAction) {
+    adminFilterAction.addEventListener("change", renderAdminView);
+  }
+  if (adminSearchLog) {
+    adminSearchLog.addEventListener("input", renderAdminView);
+  }
+
+  // Exportar Auditoría a CSV
+  if (exportAuditCsvBtn) {
+    exportAuditCsvBtn.addEventListener("click", () => {
+      const logs = getAuditLogs();
+      if (logs.length === 0) {
+        showToast("No hay registros de auditoría para exportar.");
+        return;
+      }
+
+      const headers = ["ID", "Fecha_Hora", "Usuario", "Accion", "Lead_ID", "Lead_Nombre", "Municipio", "Detalles"];
+      const rows = logs.map((l) => [
+        `"${l.id}"`,
+        `"${l.dateFormatted}"`,
+        `"${l.user}"`,
+        `"${l.actionType}"`,
+        `"${l.leadId || ""}"`,
+        `"${(l.leadName || "").replace(/"/g, '""')}"`,
+        `"${(l.leadMunicipio || "").replace(/"/g, '""')}"`,
+        `"${(l.details.summary || "").replace(/"/g, '""')}"`
+      ]);
+
+      const csvContent = "\uFEFF" + [headers.join(";"), ...rows.map((r) => r.join(";"))].join("\r\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `auditoria_crm_jrg_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast(`Exportados ${logs.length} registros de auditoría a CSV.`);
+    });
+  }
+
+  // Limpiar Historial de Auditoría
+  if (clearAuditLogsBtn) {
+    clearAuditLogsBtn.addEventListener("click", () => {
+      if (confirm("¿Seguro que deseas vaciar el historial de auditoría? Esta acción no se puede deshacer.")) {
+        localStorage.removeItem("jrg_crm_audit_logs");
+        renderAdminView();
+        showToast("Historial de auditoría reiniciado.");
+      }
+    });
+  }
+
+  // ==========================================================================
+  // AUTENTICACIÓN Y CONTROL DE SESIÓN
+  // ==========================================================================
   function checkAuth() {
-    const isLogged = sessionStorage.getItem("jrg_auth_session") === "true";
-    if (isLogged) {
+    const user = getCurrentUser();
+    if (user) {
       if (authScreen) authScreen.style.display = "none";
+      applyUserRoleUI();
     } else {
       if (authScreen) {
         authScreen.style.display = "flex";
@@ -1033,12 +1424,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const u = (authUsername.value || "").trim();
     const p = (authPassword.value || "").trim();
 
-    if (u === AUTH_CREDENTIALS.username && p === AUTH_CREDENTIALS.password) {
+    const targetUser = USERS[u];
+
+    if (targetUser && targetUser.password === p) {
       sessionStorage.setItem("jrg_auth_session", "true");
       sessionStorage.setItem("jrg_auth_user", u);
       if (authError) authError.style.display = "none";
       if (authScreen) authScreen.style.display = "none";
-      showToast(`Acceso concedido — Bienvenido ${u}`);
+
+      applyUserRoleUI();
+      logActivity("login", null, { summary: `Inicio de sesión exitoso como ${targetUser.roleLabel}` });
+
+      showToast(`Bienvenido ${targetUser.name} (${targetUser.roleLabel})`);
       refreshAllViews();
     } else {
       if (authError) authError.style.display = "block";
@@ -1050,6 +1447,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function handleLogout() {
+    const currentUser = getCurrentUser();
+    if (currentUser) {
+      logActivity("login", null, { summary: `Cierre de sesión de ${currentUser.name}` });
+    }
     sessionStorage.removeItem("jrg_auth_session");
     sessionStorage.removeItem("jrg_auth_user");
     if (authPassword) authPassword.value = "";
@@ -1062,9 +1463,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (authForm) authForm.addEventListener("submit", handleLogin);
   if (logoutBtn) logoutBtn.addEventListener("click", handleLogout);
 
-  // Inicialización
+  // Inicialización Global
   checkAuth();
   populateMunicipios();
   refreshAllViews();
 });
+
 

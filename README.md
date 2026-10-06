@@ -23,7 +23,8 @@ Sistema interno de prospección comercial y pipeline de ventas para **JRG Agency
 - **Métricas:** Dashboard con valor total de pipeline (pago único), ingresos recurrentes mensuales (MRR), volumen de leads y distribución por servicios.
 - **Configurador de Servicios:** Checkboxes independientes y selector interactivo para ajustar presupuestos de automatización entre 900 € y 1.400 €.
 - **Exportación:** Descarga completa de leads filtrados a formato CSV/Excel.
-- **Control de Acceso:** Pasarela de autenticación previa para proteger los datos comerciales del equipo.
+- **Control de Acceso y Roles:** Pasarela de autenticación con doble perfil: Closer Comercial (`salman_jrg`) y Panel de Administrador (`jakes_jrg`).
+- **Supervisión & Auditoría en Tiempo Real:** Panel exclusivo para el administrador con registro de todas las operaciones realizadas por el closer (propuestas enviadas, contactos por WhatsApp, cambios de estado y notas).
 - **Persistencia Local:** Sincronización continua de estados, presupuestos y notas privadas en LocalStorage.
 
 ---

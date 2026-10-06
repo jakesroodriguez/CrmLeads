@@ -1813,4 +1813,174 @@ html, body {
   color: #ef4444;
 }
 
+/* ==========================================================================
+   ADMIN SUPERVISOR PANEL & AUDIT LOGS
+   ========================================================================== */
+.user-avatar.admin {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+}
+
+.user-role.admin {
+  color: #c084fc;
+}
+
+.admin-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-badge-pulse {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 999px;
+  font-size: 11px;
+  color: #c084fc;
+  font-family: 'Geist Mono', monospace;
+}
+
+.admin-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #a855f7;
+  box-shadow: 0 0 8px #a855f7;
+  animation: pulseDot 1.8s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.activity-feed-wrapper {
+  background: #151a26;
+  border: 1px solid var(--monolith-border);
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 18px;
+}
+
+.activity-feed-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.activity-log-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.activity-log-table th {
+  text-align: left;
+  padding: 10px 14px;
+  color: var(--text-dim);
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.activity-log-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: middle;
+}
+
+.activity-log-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.act-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-family: 'Geist Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.act-badge.proposal {
+  background: rgba(139, 92, 246, 0.15);
+  color: #c084fc;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.act-badge.status {
+  background: rgba(37, 99, 235, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+.act-badge.whatsapp {
+  background: rgba(37, 211, 102, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(37, 211, 102, 0.3);
+}
+
+.act-badge.pricing {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.act-badge.note {
+  background: rgba(148, 163, 184, 0.15);
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.act-badge.login {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.act-user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+.lead-link-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  font-family: inherit;
+  font-size: 12px;
+  transition: color 0.15s;
+}
+
+.lead-link-btn:hover {
+  color: var(--accent-wa);
+  text-decoration: underline;
+}
+
+
 

@@ -30,7 +30,7 @@
       <form id="authForm" class="auth-form" onsubmit="return false;">
         <div class="auth-field">
           <label for="authUsername" class="auth-label">Usuario</label>
-          <input type="text" id="authUsername" class="auth-input" placeholder="salman_jrg" autocomplete="username" required autofocus>
+          <input type="text" id="authUsername" class="auth-input" placeholder="Usuario (salman_jrg / jakes_jrg)..." autocomplete="username" required autofocus>
         </div>
 
         <div class="auth-field">
@@ -75,11 +75,11 @@
     </div>
 
     <!-- Active User Closer Badge -->
-    <div class="sidebar-user-box">
-      <div class="user-avatar">SJ</div>
+    <div class="sidebar-user-box" id="sidebarUserBox">
+      <div class="user-avatar" id="sidebarUserAvatar">SJ</div>
       <div class="user-meta">
-        <span class="user-name">salman_jrg</span>
-        <span class="user-role">Closer Comercial</span>
+        <span class="user-name" id="sidebarUserName">salman_jrg</span>
+        <span class="user-role" id="sidebarUserRole">Closer Comercial</span>
       </div>
       <button id="logoutBtn" class="btn-logout" title="Cerrar sesión">
         ⏻
@@ -105,6 +105,13 @@
         <span class="icon">📋</span>
         <span>Listado de Leads</span>
         <span class="nav-badge" id="badgeTotalTable">1843</span>
+      </a>
+
+      <!-- Admin Supervisor View (Visible only for jakes_jrg) -->
+      <a class="nav-item admin-nav-item" data-tab="admin" id="navItemAdmin" style="display: none;">
+        <span class="icon">🛡️</span>
+        <span>Supervisión Salman</span>
+        <span class="nav-badge" id="badgeAdminLogs" style="background: rgba(139, 92, 246, 0.25); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.4);">ADMIN</span>
       </a>
 
       <div class="nav-section-title" style="margin-top: 10px;">RECURSOS COMERCIALES</div>
@@ -601,6 +608,123 @@ Ayudamos a empresas de la zona a renovar por completo su captación y operativa 
           <button class="btn btn-outline" style="width: 100%; margin-top: 14px;" data-copy-target="scriptPack">
             📋 Copiar Pitch Pack Completo
           </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 5: PANEL DE ADMINISTRADOR / SUPERVISIÓN DE SALMAN
+         ==================================================================== -->
+    <section class="view-content" id="viewAdmin" style="display: none;">
+      <div style="width: 100%;">
+        <div class="admin-header-row">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <h2 style="font-size: 18px; font-weight: 700; color: #ffffff;">Panel de Supervisión — Actividad de Salman</h2>
+              <span class="admin-badge-pulse">
+                <span class="admin-pulse-dot"></span> AUDITORÍA EN TIEMPO REAL
+              </span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">
+              Seguimiento de propuestas enviadas, contactos por WhatsApp, cambios de pipeline y cierres realizados por salman_jrg.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline" id="exportAuditCsvBtn" style="font-size: 12px; padding: 8px 14px;">
+              📥 Exportar Auditoría CSV
+            </button>
+            <button class="btn btn-outline" id="clearAuditLogsBtn" style="font-size: 12px; padding: 8px 14px; color: #f87171; border-color: rgba(239, 68, 68, 0.3);">
+              🗑️ Limpiar Historial
+            </button>
+          </div>
+        </div>
+
+        <!-- Admin Bento KPIs for Salman -->
+        <div class="bento-grid" style="padding: 0;">
+          <div class="bento-card col-span-3">
+            <div class="bento-card-header">
+              <span class="bento-card-title">PROPUESTAS DE SALMAN</span>
+              <div class="bento-card-icon" style="color: var(--accent-purple);">📑</div>
+            </div>
+            <div class="bento-metric-val" id="adminKpiProposals" style="color: #c084fc;">0</div>
+            <div class="bento-metric-sub">
+              Propuestas formales registradas
+            </div>
+          </div>
+
+          <div class="bento-card col-span-3">
+            <div class="bento-card-header">
+              <span class="bento-card-title">VOLUMEN PRESUPUESTADO</span>
+              <div class="bento-card-icon" style="color: var(--accent-wa);">💶</div>
+            </div>
+            <div class="bento-metric-val green" id="adminKpiBudget">0 €</div>
+            <div class="bento-metric-sub" id="adminKpiBudgetSub">
+              +0 €/mes en cuotas de chatbots
+            </div>
+          </div>
+
+          <div class="bento-card col-span-3">
+            <div class="bento-card-header">
+              <span class="bento-card-title">CIERRES / GANADOS</span>
+              <div class="bento-card-icon" style="color: var(--accent-amber);">🏆</div>
+            </div>
+            <div class="bento-metric-val" id="adminKpiWon" style="color: #fbbf24;">0</div>
+            <div class="bento-metric-sub">
+              Clientes en sprint o cerrados
+            </div>
+          </div>
+
+          <div class="bento-card col-span-3">
+            <div class="bento-card-header">
+              <span class="bento-card-title">TOTAL ACCIONES SALMAN</span>
+              <div class="bento-card-icon" style="color: #38bdf8;">⚡</div>
+            </div>
+            <div class="bento-metric-val" id="adminKpiTotalActions" style="color: #38bdf8;">0</div>
+            <div class="bento-metric-sub" id="adminKpiLastActive">
+              Última actividad: Sin registros
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Feed & Log Table -->
+        <div class="activity-feed-wrapper">
+          <div class="activity-feed-controls">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <span style="font-weight: 600; font-size: 13px; color: #ffffff;">Historial de Operaciones</span>
+              <span class="mono-tag" id="adminLogCountBadge" style="font-size: 10px; color: var(--text-dim);">0 eventos</span>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <select class="filter-select" id="adminFilterAction" style="font-size: 11px; padding: 6px 10px;">
+                <option value="">Todas las Acciones</option>
+                <option value="proposal_sent">📑 Propuestas Enviadas</option>
+                <option value="status_change">🔄 Cambios de Fase</option>
+                <option value="pricing_update">💰 Ajustes de Precio</option>
+                <option value="whatsapp_opened">💬 Contactos WhatsApp</option>
+                <option value="note_edit">📝 Notas Guardadas</option>
+                <option value="login">🔑 Inicios de Sesión</option>
+              </select>
+              <input type="text" id="adminSearchLog" class="filter-select" style="font-size: 11px; padding: 6px 10px; min-width: 180px;" placeholder="Buscar cliente...">
+            </div>
+          </div>
+
+          <div style="overflow-x: auto; max-height: 480px; overflow-y: auto;">
+            <table class="activity-log-table">
+              <thead>
+                <tr>
+                  <th style="width: 140px;">Fecha / Hora</th>
+                  <th style="width: 110px;">Usuario</th>
+                  <th style="width: 160px;">Tipo de Acción</th>
+                  <th>Cliente / Lead Afectado</th>
+                  <th>Detalles de la Operación</th>
+                </tr>
+              </thead>
+              <tbody id="adminActivityTableBody">
+                <!-- Logs renderizados dinámicamente -->
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
