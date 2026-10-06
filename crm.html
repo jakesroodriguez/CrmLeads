@@ -17,6 +17,43 @@
 <body>
 
   <!-- ======================================================================
+       AUTH GATEWAY SCREEN
+       ====================================================================== -->
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <img src="assets/logo.png" alt="JRG Agency" class="auth-logo">
+        <h2 class="auth-title">JRG AGENCY</h2>
+        <p class="auth-subtitle">Acceso Comercial & Closer Pipeline</p>
+      </div>
+
+      <form id="authForm" class="auth-form" onsubmit="return false;">
+        <div class="auth-field">
+          <label for="authUsername" class="auth-label">Usuario</label>
+          <input type="text" id="authUsername" class="auth-input" placeholder="salman_jrg" autocomplete="username" required autofocus>
+        </div>
+
+        <div class="auth-field">
+          <label for="authPassword" class="auth-label">Contraseña</label>
+          <input type="password" id="authPassword" class="auth-input" placeholder="••••••••••••••••••••" autocomplete="current-password" required>
+        </div>
+
+        <div id="authError" class="auth-error" style="display: none;">
+          Credenciales incorrectas. Verifica usuario y contraseña.
+        </div>
+
+        <button type="submit" id="authSubmitBtn" class="btn btn-wa auth-submit-btn">
+          Acceder al CRM
+        </button>
+      </form>
+
+      <div class="auth-footer-text">
+        🔒 Acceso restringido exclusivo para el equipo de JRG Agency
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
        SIDEBAR
        ====================================================================== -->
   <aside class="crm-sidebar">
@@ -35,6 +72,18 @@
         </h2>
         <p>Panel Comercial & Clientes</p>
       </div>
+    </div>
+
+    <!-- Active User Closer Badge -->
+    <div class="sidebar-user-box">
+      <div class="user-avatar">SJ</div>
+      <div class="user-meta">
+        <span class="user-name">salman_jrg</span>
+        <span class="user-role">Closer Comercial</span>
+      </div>
+      <button id="logoutBtn" class="btn-logout" title="Cerrar sesión">
+        ⏻
+      </button>
     </div>
 
     <!-- Navigation Views -->

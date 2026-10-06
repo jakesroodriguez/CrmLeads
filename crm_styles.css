@@ -1617,3 +1617,200 @@ html, body {
   border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
+/* ==========================================================================
+   AUTHENTICATION GATEWAY STYLES
+   ========================================================================== */
+.auth-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: var(--canvas);
+  background-image: 
+    radial-gradient(at 15% 20%, rgba(37, 99, 235, 0.18) 0px, transparent 50%),
+    radial-gradient(at 85% 80%, rgba(37, 211, 102, 0.14) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(21, 26, 38, 0.95) 0px, transparent 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: #151a26;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 36px 30px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+  animation: fadeInAuth 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInAuth {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.auth-brand {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.auth-logo {
+  width: 68px;
+  height: 68px;
+  border-radius: 16px;
+  margin: 0 auto 14px auto;
+  display: block;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.auth-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.auth-subtitle {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.auth-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-family: 'Geist Mono', monospace;
+}
+
+.auth-input {
+  width: 100%;
+  background: #0c0f16;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #ffffff;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.auth-input:focus {
+  border-color: var(--accent-wa);
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.15);
+}
+
+.auth-error {
+  padding: 10px 12px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  color: #fca5a5;
+  font-size: 12px;
+  text-align: center;
+}
+
+.auth-submit-btn {
+  width: 100%;
+  padding: 13px;
+  font-size: 14px;
+  margin-top: 4px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.auth-footer-text {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 20px;
+  letter-spacing: 0.02em;
+}
+
+/* User Profile Box en Sidebar */
+.sidebar-user-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--monolith-border);
+  border-radius: 10px;
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 11px;
+  font-family: 'Geist Mono', monospace;
+}
+
+.user-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.user-role {
+  font-size: 10px;
+  color: var(--accent-wa);
+  font-family: 'Geist Mono', monospace;
+}
+
+.btn-logout {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-dim);
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+
+

@@ -255,6 +255,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const toast = document.getElementById("toast");
 
+  // Elementos de Autenticación
+  const authScreen = document.getElementById("authScreen");
+  const authForm = document.getElementById("authForm");
+  const authUsername = document.getElementById("authUsername");
+  const authPassword = document.getElementById("authPassword");
+  const authError = document.getElementById("authError");
+  const logoutBtn = document.getElementById("logoutBtn");
+
   // Formato Moneda EUR
   function formatEUR(val) {
     return new Intl.NumberFormat("es-ES", {
@@ -998,7 +1006,65 @@ document.addEventListener("DOMContentLoaded", () => {
     if (bTable) bTable.textContent = totalCount;
   }
 
+  // ==========================================================================
+  // SISTEMA DE CONTROL DE ACCESO (CLOSER AUTH GATEWAY)
+  // ==========================================================================
+  const AUTH_CREDENTIALS = {
+    username: "salman_jrg",
+    password: "JrgAgencyCloserSalman"
+  };
+
+  function checkAuth() {
+    const isLogged = sessionStorage.getItem("jrg_auth_session") === "true";
+    if (isLogged) {
+      if (authScreen) authScreen.style.display = "none";
+    } else {
+      if (authScreen) {
+        authScreen.style.display = "flex";
+        setTimeout(() => {
+          if (authUsername) authUsername.focus();
+        }, 120);
+      }
+    }
+  }
+
+  function handleLogin(e) {
+    if (e) e.preventDefault();
+    const u = (authUsername.value || "").trim();
+    const p = (authPassword.value || "").trim();
+
+    if (u === AUTH_CREDENTIALS.username && p === AUTH_CREDENTIALS.password) {
+      sessionStorage.setItem("jrg_auth_session", "true");
+      sessionStorage.setItem("jrg_auth_user", u);
+      if (authError) authError.style.display = "none";
+      if (authScreen) authScreen.style.display = "none";
+      showToast(`Acceso concedido — Bienvenido ${u}`);
+      refreshAllViews();
+    } else {
+      if (authError) authError.style.display = "block";
+      if (authPassword) {
+        authPassword.value = "";
+        authPassword.focus();
+      }
+    }
+  }
+
+  function handleLogout() {
+    sessionStorage.removeItem("jrg_auth_session");
+    sessionStorage.removeItem("jrg_auth_user");
+    if (authPassword) authPassword.value = "";
+    if (authError) authError.style.display = "none";
+    if (authScreen) authScreen.style.display = "flex";
+    if (authUsername) authUsername.focus();
+    showToast("Sesión cerrada.");
+  }
+
+  if (authForm) authForm.addEventListener("submit", handleLogin);
+  if (logoutBtn) logoutBtn.addEventListener("click", handleLogout);
+
   // Inicialización
+  checkAuth();
   populateMunicipios();
   refreshAllViews();
 });
+
