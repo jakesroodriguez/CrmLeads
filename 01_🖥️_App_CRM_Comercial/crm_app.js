@@ -12,13 +12,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "PROPUESTA ENVIADA",
     "EN DESARROLLO / SPRINT",
     "CERRADO GANADO",
-    "EN ESPERA / SEGUIMIENTO"
+    "EN ESPERA / SEGUIMIENTO",
+    "DESCARTADO / CADENA",
+    "DESCARTADO / DUPLICADO"
   ];
 
   const CATEGORIAS = [
     "Restauración / Hostelería",
     "PYME / Empresa",
-    "Comercio / Autónomo"
+    "Comercio / Autónomo",
+    "Gran Franquicia / Cadena",
+    "Duplicado / Registro secundario"
   ];
 
   const CANALES = [
@@ -172,10 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const leadObj = {
       ...item,
-      categoria_negocio: saved.categoria_negocio || defaultCat,
-      canal_entrada: saved.canal_entrada || (item.gmaps_url || (item.reviews && item.reviews !== "0") ? "Google Business Local" : "WhatsApp"),
-      ubicacion: saved.ubicacion || "Gipuzkoa (Local)",
-      crm_status: (STAGES.includes(saved.status) ? saved.status : "INBOX / LEADS"),
+      categoria_negocio: saved.categoria_negocio || item.categoria_negocio || defaultCat,
+      canal_entrada: saved.canal_entrada || item.canal_entrada || (item.gmaps_url || (item.reviews && item.reviews !== "0") ? "Google Business Local" : "WhatsApp"),
+      ubicacion: saved.ubicacion || item.ubicacion || "Gipuzkoa (Local)",
+      crm_status: (saved.status && STAGES.includes(saved.status) ? saved.status : (item.crm_status || "INBOX / LEADS")),
       notes: saved.notes || "",
       service_web: sWeb,
       service_chatbot: sChatbot,
@@ -886,12 +890,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function getCategoryPillClass(cat) {
     if (cat === "Restauración / Hostelería") return "pill-cat-restauracion";
     if (cat === "PYME / Empresa") return "pill-cat-pyme";
+    if (cat === "Gran Franquicia / Cadena") return "pill-cat-cadena";
+    if (cat === "Duplicado / Registro secundario") return "pill-cat-duplicado";
     return "pill-cat-comercio";
   }
 
   function getCategoryIcon(cat) {
     if (cat === "Restauración / Hostelería") return "🍽️";
     if (cat === "PYME / Empresa") return "🏢";
+    if (cat === "Gran Franquicia / Cadena") return "🏬";
+    if (cat === "Duplicado / Registro secundario") return "⚠️";
     return "🛍️";
   }
 
@@ -901,6 +909,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (st === "PROPUESTA ENVIADA") return "status-propuesta";
     if (st === "EN DESARROLLO / SPRINT") return "status-sprint";
     if (st === "CERRADO GANADO") return "status-ganado";
+    if (st === "DESCARTADO / CADENA") return "status-cadena";
+    if (st === "DESCARTADO / DUPLICADO") return "status-duplicado";
     return "status-espera";
   }
 

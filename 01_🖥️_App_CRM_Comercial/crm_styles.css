@@ -877,6 +877,16 @@ h1, h2, h3, h4, .kpi-value, .brand-title, .modal-title {
   border-color: rgba(139, 92, 246, 0.25);
   color: #c084fc;
 }
+.pill-cat-cadena {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.25);
+  color: #f87171;
+}
+.pill-cat-duplicado {
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.25);
+  color: #94a3b8;
+}
 
 /* Service Pills */
 .pill-srv-auto {
@@ -938,6 +948,8 @@ h1, h2, h3, h4, .kpi-value, .brand-title, .modal-title {
 .status-sprint { background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.3); color: #fbbf24; }
 .status-ganado { background: rgba(37, 211, 102, 0.15); border-color: rgba(37, 211, 102, 0.35); color: #4ade80; box-shadow: var(--shadow-glow-wa); }
 .status-espera { background: rgba(100, 116, 139, 0.1); border-color: rgba(100, 116, 139, 0.2); color: #94a3b8; }
+.status-cadena { background: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.35); color: #f87171; }
+.status-duplicado { background: rgba(156, 163, 175, 0.12); border-color: rgba(156, 163, 175, 0.35); color: #94a3b8; }
 
 /* ==========================================================================
    DENSE TABULAR VIEW (Linear / Raycast Style)
