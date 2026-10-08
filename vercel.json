@@ -2,8 +2,7 @@
   "version": 2,
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/01_🖥️_App_CRM_Comercial/index.html" },
-    { "source": "/crm", "destination": "/01_🖥️_App_CRM_Comercial/index.html" },
-    { "source": "/:path*", "destination": "/01_🖥️_App_CRM_Comercial/:path*" }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/crm", "destination": "/index.html" }
   ]
 }

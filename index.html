@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JRG Agency — Leads CRM & Sales Pipeline</title>
+  
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  
+  <!-- Typography: Geist & Geist Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="crm_styles.css">
+</head>
+<body>
+
+  <!-- ======================================================================
+       AUTH GATEWAY SCREEN
+       ====================================================================== -->
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <img src="assets/logo.png" alt="JRG Agency" class="auth-logo">
+        <h2 class="auth-title">JRG AGENCY</h2>
+        <p class="auth-subtitle">Acceso Comercial & Closer Pipeline</p>
+      </div>
+
+      <form id="authForm" class="auth-form" onsubmit="return false;">
+        <div class="auth-field">
+          <label for="authUsername" class="auth-label">Usuario</label>
+          <input type="text" id="authUsername" class="auth-input" placeholder="Usuario (salman_jrg / jakes_jrg)..." autocomplete="username" required autofocus>
+        </div>
+
+        <div class="auth-field">
+          <label for="authPassword" class="auth-label">Contraseña</label>
+          <input type="password" id="authPassword" class="auth-input" placeholder="••••••••••••••••••••" autocomplete="current-password" required>
+        </div>
+
+        <div id="authError" class="auth-error" style="display: none;">
+          Credenciales incorrectas. Verifica usuario y contraseña.
+        </div>
+
+        <button type="submit" id="authSubmitBtn" class="btn btn-wa auth-submit-btn">
+          Acceder al CRM
+        </button>
+      </form>
+
+      <div class="auth-footer-text">
+        🔒 Acceso restringido exclusivo para el equipo de JRG Agency
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       SIDEBAR
+       ====================================================================== -->
+  <aside class="crm-sidebar">
+    <!-- Brand Header -->
+    <div class="crm-brand">
+      <div class="brand-icon-box">
+        <img src="assets/logo.png" alt="JRG Agency" class="brand-logo-img">
+      </div>
+      <div class="brand-text">
+        <h2>
+          JRG AGENCY
+          <a href="https://jrgagency.eus" target="_blank" class="brand-live-badge" title="Visitar jrgagency.eus">
+            <span class="live-dot"></span>
+            LIVE
+          </a>
+        </h2>
+        <p>Panel Comercial & Clientes</p>
+      </div>
+    </div>
+
+    <!-- Active User Closer Badge -->
+    <div class="sidebar-user-box" id="sidebarUserBox">
+      <div class="user-avatar" id="sidebarUserAvatar">SJ</div>
+      <div class="user-meta">
+        <span class="user-name" id="sidebarUserName">salman_jrg</span>
+        <span class="user-role" id="sidebarUserRole">Closer Comercial</span>
+      </div>
+      <button id="logoutBtn" class="btn-logout" title="Cerrar sesión">
+        ⏻
+      </button>
+    </div>
+
+    <!-- Navigation Views -->
+    <nav class="crm-nav">
+      <div class="nav-section-title">VISTAS OPERATIVAS</div>
+      
+      <a class="nav-item active" data-tab="dashboard">
+        <span class="icon">📊</span>
+        <span>Dashboard General</span>
+      </a>
+
+      <a class="nav-item" data-tab="kanban">
+        <span class="icon">🗂️</span>
+        <span>Pipeline Kanban</span>
+        <span class="nav-badge" id="badgeTotalKanban">1843</span>
+      </a>
+
+      <a class="nav-item" data-tab="table">
+        <span class="icon">📋</span>
+        <span>Listado de Leads</span>
+        <span class="nav-badge" id="badgeTotalTable">1843</span>
+      </a>
+
+      <!-- Admin Supervisor View (Visible only for jakes_jrg) -->
+      <a class="nav-item admin-nav-item" data-tab="admin" id="navItemAdmin" style="display: none;">
+        <span class="icon">🛡️</span>
+        <span>Supervisión Salman</span>
+        <span class="nav-badge" id="badgeAdminLogs" style="background: rgba(139, 92, 246, 0.25); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.4);">ADMIN</span>
+      </a>
+
+      <div class="nav-section-title" style="margin-top: 10px;">RECURSOS COMERCIALES</div>
+
+      <a class="nav-item" data-tab="scripts">
+        <span class="icon">💬</span>
+        <span>Playbook de Pitches</span>
+      </a>
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <div style="font-weight: 700; color: #ffffff; letter-spacing: 0.05em; font-family: 'Geist Mono', monospace; font-size: 11px;">
+        JRG AGENCY CRM
+      </div>
+      <div style="margin-top: 4px; color: var(--text-dim); font-size: 11px;">
+        Base de datos Goierri & Urola Garaia
+      </div>
+      <a href="https://jrgagency.eus" target="_blank" class="sidebar-agency-link">
+        <span>jrgagency.eus</span>
+        <span style="color: var(--accent-wa); font-size: 10px;">↗ WEB OFICIAL</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ======================================================================
+       MAIN CONTENT CONTAINER
+       ====================================================================== -->
+  <main class="crm-main">
+    <!-- Header -->
+    <header class="crm-header">
+      <div class="header-title">
+        <h1>
+          JRG AGENCY
+          <span class="tagline-sub">/ Sales Pipeline & CRM</span>
+        </h1>
+        <p>Desarrollo Web • Chatbots IA • Automatizaciones de Procesos</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-outline" id="exportCsvBtn" title="Exportar leads filtrados en formato CSV/Excel">
+          <span>📥</span> Exportar CSV
+        </button>
+        <a href="https://jrgagency.eus" target="_blank" class="btn btn-wa" style="text-decoration: none;">
+          <span class="live-dot"></span> Web JRG Agency
+        </a>
+      </div>
+    </header>
+
+    <!-- Filter Bar (Universal across views) -->
+    <section style="padding: 18px 32px 0 32px;">
+      <div class="filter-bar">
+        <!-- Search Box -->
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Buscar por cliente, sector, teléfono, ID...">
+        </div>
+
+        <!-- Categoría de Negocio Filter -->
+        <select class="filter-select" id="filterCategoria">
+          <option value="">Todas las Categorías</option>
+          <option value="Restauración / Hostelería">🍽️ Restauración / Hostelería</option>
+          <option value="PYME / Empresa">🏢 PYME / Empresa</option>
+          <option value="Comercio / Autónomo">🛍️ Comercio / Autónomo</option>
+        </select>
+
+        <!-- Servicio Filter -->
+        <select class="filter-select" id="filterServicio">
+          <option value="">Todos los Servicios</option>
+          <option value="web">🌐 Desarrollo Web (460 €)</option>
+          <option value="chatbot">🤖 Chatbots IA (530 € + 25 €/m)</option>
+          <option value="automation">⚡ Automatizaciones IA (900 € - 1.400 €)</option>
+        </select>
+
+        <!-- Canal de Entrada Filter -->
+        <select class="filter-select" id="filterCanal">
+          <option value="">Todos los Canales</option>
+          <option value="WhatsApp">💬 WhatsApp</option>
+          <option value="Formulario Web">🌐 Formulario Web</option>
+          <option value="Google Business Local">📍 Google Business Local</option>
+          <option value="Referido">🤝 Referido</option>
+        </select>
+
+        <!-- Ubicación Filter -->
+        <select class="filter-select" id="filterUbicacion">
+          <option value="">Todas las Ubicaciones</option>
+          <option value="Gipuzkoa (Local)">📍 Gipuzkoa (Local)</option>
+          <option value="España (Nacional)">🇪🇸 España (Nacional)</option>
+          <option value="Internacional">🌍 Internacional</option>
+        </select>
+
+        <!-- Municipio Filter -->
+        <select class="filter-select" id="filterMunicipio">
+          <option value="">Todos los Municipios</option>
+        </select>
+
+        <!-- Pipeline Stage Filter -->
+        <select class="filter-select" id="filterStatus">
+          <option value="">Todas las Fases</option>
+          <option value="INBOX / LEADS">📥 INBOX / LEADS</option>
+          <option value="CALIFICACIÓN">🔍 CALIFICACIÓN</option>
+          <option value="PROPUESTA ENVIADA">📑 PROPUESTA ENVIADA</option>
+          <option value="EN DESARROLLO / SPRINT">⚡ EN DESARROLLO / SPRINT</option>
+          <option value="CERRADO GANADO">🏆 CERRADO GANADO</option>
+          <option value="EN ESPERA / SEGUIMIENTO">⏳ EN ESPERA / SEGUIMIENTO</option>
+          <option value="DESCARTADO / CADENA">🏢 DESCARTADO / CADENA</option>
+          <option value="DESCARTADO / DUPLICADO">⚠️ DESCARTADO / DUPLICADO</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 1: DASHBOARD GENERAL
+         ==================================================================== -->
+    <section class="view-content" id="viewDashboard">
+      <div class="bento-grid" style="padding: 10px 0 0 0;">
+        <!-- Card 1: Pipeline Value in EUR (Pago Único) -->
+        <div class="bento-card col-span-3">
+          <div class="bento-card-header">
+            <span class="bento-card-title">VALOR PIPELINE (PAGO ÚNICO)</span>
+            <div class="bento-card-icon" style="color: var(--accent-wa);">💶</div>
+          </div>
+          <div class="bento-metric-val green" id="kpiPipelineValue">0 €</div>
+          <div class="bento-metric-sub">
+            <span class="live-dot"></span> Suma de presupuestos iniciales activos
+          </div>
+        </div>
+
+        <!-- Card 2: Recurrente Mensual (MRR) -->
+        <div class="bento-card col-span-3">
+          <div class="bento-card-header">
+            <span class="bento-card-title">RECURRENTE MENSUAL (MRR)</span>
+            <div class="bento-card-icon" style="color: #38bdf8;">🔄</div>
+          </div>
+          <div class="bento-metric-val mrr" id="kpiMRRValue">0 €/mes</div>
+          <div class="bento-metric-sub">
+            Cuotas de mantenimiento Chatbots (+25 €/mes)
+          </div>
+        </div>
+
+        <!-- Card 3: Total Leads -->
+        <div class="bento-card col-span-3">
+          <div class="bento-card-header">
+            <span class="bento-card-title">TOTAL LEADS REGISTRADOS</span>
+            <div class="bento-card-icon" style="color: var(--accent-tech);">🏢</div>
+          </div>
+          <div class="bento-metric-val" id="kpiTotalLeads">1843</div>
+          <div class="bento-metric-sub">
+            Goierri (1.163) + Urola Garaia (680)
+          </div>
+        </div>
+
+        <!-- Card 4: Proyectos Ganados & Activos -->
+        <div class="bento-card col-span-3">
+          <div class="bento-card-header">
+            <span class="bento-card-title">CIERRES Y EN PROCESO</span>
+            <div class="bento-card-icon" style="color: var(--accent-amber);">🏆</div>
+          </div>
+          <div class="bento-metric-val" id="kpiGanadosSprint">0</div>
+          <div class="bento-metric-sub">
+            Leads ganados y en desarrollo activo
+          </div>
+        </div>
+
+        <!-- Card 5: Desglose por Servicio JRG (8 Cols) -->
+        <div class="bento-card col-span-8">
+          <div class="bento-card-header">
+            <span class="bento-card-title">SERVICIOS & CARTERA JRG AGENCY</span>
+            <span class="mono-tag" style="font-size: 10px; color: var(--text-dim);">TARIFAS OFICIALES</span>
+          </div>
+
+          <div class="service-breakdown-list">
+            <!-- Desarrollo Web -->
+            <div class="service-bar-item">
+              <div class="service-bar-labels">
+                <span style="font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 6px;">
+                  🌐 Desarrollo Web (460 € pago único)
+                </span>
+                <span class="mono-tag" id="metricCountWeb3D">0 leads</span>
+              </div>
+              <div class="service-bar-track">
+                <div class="service-bar-fill purple" id="barFillWeb3D" style="width: 40%;"></div>
+              </div>
+            </div>
+
+            <!-- Chatbots IA -->
+            <div class="service-bar-item">
+              <div class="service-bar-labels">
+                <span style="font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 6px;">
+                  🤖 Chatbots IA (530 € alta + 25 €/mes de mantenimiento)
+                </span>
+                <span class="mono-tag" id="metricCountChatbot">0 leads</span>
+              </div>
+              <div class="service-bar-track">
+                <div class="service-bar-fill emerald" id="barFillChatbot" style="width: 40%;"></div>
+              </div>
+            </div>
+
+            <!-- Automatizaciones IA -->
+            <div class="service-bar-item">
+              <div class="service-bar-labels">
+                <span style="font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 6px;">
+                  ⚡ Automatizaciones IA (900 € - 1.400 € según alcance)
+                </span>
+                <span class="mono-tag" id="metricCountAuto">0 leads</span>
+              </div>
+              <div class="service-bar-track">
+                <div class="service-bar-fill blue" id="barFillAuto" style="width: 20%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: Canales de Entrada (4 Cols) -->
+        <div class="bento-card col-span-4">
+          <div class="bento-card-header">
+            <span class="bento-card-title">CANALES DE CAPTACIÓN</span>
+            <div class="bento-card-icon">📡</div>
+          </div>
+
+          <div class="channel-pill-grid">
+            <div class="channel-stat-box">
+              <span style="font-size: 11px; color: var(--text-dim);">💬 WhatsApp</span>
+              <strong style="font-size: 18px; color: var(--accent-wa);" id="channelCountWa">0</strong>
+            </div>
+            <div class="channel-stat-box">
+              <span style="font-size: 11px; color: var(--text-dim);">📍 Google Business</span>
+              <strong style="font-size: 18px; color: #ffffff;" id="channelCountGmaps">0</strong>
+            </div>
+            <div class="channel-stat-box">
+              <span style="font-size: 11px; color: var(--text-dim);">🌐 Web Formulario</span>
+              <strong style="font-size: 18px; color: var(--accent-tech);" id="channelCountWeb">0</strong>
+            </div>
+            <div class="channel-stat-box">
+              <span style="font-size: 11px; color: var(--text-dim);">🤝 Referidos</span>
+              <strong style="font-size: 18px; color: var(--accent-purple);" id="channelCountRef">0</strong>
+            </div>
+          </div>
+
+          <div style="margin-top: 14px; font-size: 11px; color: var(--text-dim); line-height: 1.5;">
+            ✓ Contacto rápido y directo vía WhatsApp integrado con mensajes preconfigurados.
+          </div>
+        </div>
+
+        <!-- Card 7: Funnel Stages Summary (12 Cols) -->
+        <div class="bento-card col-span-12">
+          <div class="bento-card-header">
+            <span class="bento-card-title">EMBUDO OPERATIVO PIPELINE</span>
+            <span class="mono-tag" style="font-size: 10px; color: var(--text-dim);">6 FASES ACTIVAS</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 8px;">
+            <div class="channel-stat-box" style="border-top: 2px solid #94a3b8;">
+              <span class="mono-tag" style="font-size: 9px; color: #94a3b8;">INBOX / LEADS</span>
+              <strong style="font-size: 20px; color: #ffffff; margin-top: 2px;" id="stageCountInbox">0</strong>
+            </div>
+            <div class="channel-stat-box" style="border-top: 2px solid #2563eb;">
+              <span class="mono-tag" style="font-size: 9px; color: #60a5fa;">CALIFICACIÓN</span>
+              <strong style="font-size: 20px; color: #ffffff; margin-top: 2px;" id="stageCountCalif">0</strong>
+            </div>
+            <div class="channel-stat-box" style="border-top: 2px solid #8b5cf6;">
+              <span class="mono-tag" style="font-size: 9px; color: #c084fc;">PROPUESTA ENVIADA</span>
+              <strong style="font-size: 20px; color: #ffffff; margin-top: 2px;" id="stageCountPropuesta">0</strong>
+            </div>
+            <div class="channel-stat-box" style="border-top: 2px solid #f59e0b;">
+              <span class="mono-tag" style="font-size: 9px; color: #fbbf24;">EN SPRINT</span>
+              <strong style="font-size: 20px; color: #ffffff; margin-top: 2px;" id="stageCountSprint">0</strong>
+            </div>
+            <div class="channel-stat-box" style="border-top: 2px solid #25D366; background: rgba(37, 211, 102, 0.04);">
+              <span class="mono-tag" style="font-size: 9px; color: #4ade80;">CERRADO GANADO</span>
+              <strong style="font-size: 20px; color: var(--accent-wa); margin-top: 2px;" id="stageCountGanado">0</strong>
+            </div>
+            <div class="channel-stat-box" style="border-top: 2px solid #64748b;">
+              <span class="mono-tag" style="font-size: 9px; color: #94a3b8;">EN ESPERA</span>
+              <strong style="font-size: 20px; color: #ffffff; margin-top: 2px;" id="stageCountEspera">0</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 2: PIPELINE KANBAN (6 FASES)
+         ==================================================================== -->
+    <section class="view-content" id="viewKanban" style="display: none;">
+      <div class="kanban-board">
+        <!-- Col 1: INBOX / LEADS -->
+        <div class="kanban-column stage-inbox">
+          <div class="kanban-column-header">
+            <div class="col-header-info">
+              <span class="col-header-title">INBOX / LEADS</span>
+              <span class="column-count" id="countColInbox">0</span>
+            </div>
+            <span class="col-budget" id="budgetColInbox">0 €</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColInbox"></div>
+        </div>
+
+        <!-- Col 2: CALIFICACIÓN -->
+        <div class="kanban-column stage-calif">
+          <div class="kanban-column-header">
+            <div class="col-header-info">
+              <span class="col-header-title">CALIFICACIÓN</span>
+              <span class="column-count" id="countColCalif">0</span>
+            </div>
+            <span class="col-budget" id="budgetColCalif">0 €</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColCalif"></div>
+        </div>
+
+        <!-- Col 3: PROPUESTA ENVIADA -->
+        <div class="kanban-column stage-propuesta">
+          <div class="kanban-column-header">
+            <div class="col-header-info">
+              <span class="col-header-title">PROPUESTA ENVIADA</span>
+              <span class="column-count" id="countColPropuesta">0</span>
+            </div>
+            <span class="col-budget" id="budgetColPropuesta">0 €</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColPropuesta"></div>
+        </div>
+
+        <!-- Col 4: EN DESARROLLO / SPRINT -->
+        <div class="kanban-column stage-sprint">
+          <div class="kanban-column-header">
+            <div class="col-header-info">
+              <span class="col-header-title">EN SPRINT TÉCNICO</span>
+              <span class="column-count" id="countColSprint">0</span>
+            </div>
+            <span class="col-budget" id="budgetColSprint">0 €</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColSprint"></div>
+        </div>
+
+        <!-- Col 5: CERRADO GANADO -->
+        <div class="kanban-column stage-ganado">
+          <div class="kanban-column-header">
+            <div class="col-header-info">
+              <span class="col-header-title">CERRADO GANADO</span>
+              <span class="column-count" id="countColGanado">0</span>
+            </div>
+            <span class="col-budget" id="budgetColGanado">0 €</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColGanado"></div>
+        </div>
+
+        <!-- Col 6: EN ESPERA / SEGUIMIENTO -->
+        <div class="kanban-column stage-espera">
+          <div class="kanban-column-header">
+            <div class="col-header-info">
+              <span class="col-header-title">EN ESPERA</span>
+              <span class="column-count" id="countColEspera">0</span>
+            </div>
+            <span class="col-budget" id="budgetColEspera">0 €</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColEspera"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 3: LISTA TABULAR
+         ==================================================================== -->
+    <section class="view-content" id="viewTable" style="display: none;">
+      <div class="table-wrapper">
+        <div class="table-header-info">
+          <span class="table-stats" id="tableStats">Cargando registros...</span>
+          <div style="font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 6px;">
+            <span>💡 Clic en cualquier fila para configurar servicios, presupuesto y notas</span>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="crm-table">
+            <thead>
+              <tr>
+                <th data-sort="id">ID</th>
+                <th data-sort="nombre">Cliente / Empresa</th>
+                <th data-sort="categoria_negocio">Categoría</th>
+                <th>Servicios Activos</th>
+                <th data-sort="canal_entrada">Canal</th>
+                <th data-sort="presupuesto_estimado">Presupuesto (€)</th>
+                <th data-sort="crm_status">Fase Pipeline</th>
+                <th style="cursor: default;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Filas renderizadas dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-bar">
+          <span id="paginationInfo" class="mono-tag" style="font-size: 11px; color: var(--text-dim);">Página 1</span>
+          <div style="display: flex; gap: 8px;">
+            <button class="page-btn" id="prevPageBtn" disabled>← Anterior</button>
+            <button class="page-btn" id="nextPageBtn">Siguiente →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 4: PLAYBOOK DE PITCHES
+         ==================================================================== -->
+    <section class="view-content" id="viewScripts" style="display: none;">
+      <div class="scripts-grid">
+        <!-- Pitch 1: Desarrollo Web -->
+        <div class="script-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="display: flex; align-items: center; gap: 8px;">
+              🌐 Desarrollo Web
+            </h3>
+            <span class="pill pill-srv-web">460 € Pago único</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">
+            Enfoque: Web corporativa de alto impacto, carga en milisegundos y optimizada para convertir visitas en ventas.
+          </p>
+          <div class="script-body" id="scriptWeb">"Kaixo [Nombre del Negocio]! Os escribo desde JRG Agency (https://jrgagency.eus).
+
+Estuvimos viendo vuestra presencia digital en [Municipio] y tenéis un gran negocio, pero vuestra web actual no refleja la calidad de vuestros servicios.
+
+Desarrollamos webs corporativas de alta velocidad y conversión con diseño profesional por 460 € de pago único, con entrega rápida y sin costes sorpresa.
+
+¿Te parecería bien que te pase una propuesta visual rápida de 1 minuto sin ningún compromiso? ¡Un saludo!"</div>
+          <button class="btn btn-outline" style="width: 100%; margin-top: 14px;" data-copy-target="scriptWeb">
+            📋 Copiar Pitch Web
+          </button>
+        </div>
+
+        <!-- Pitch 2: Chatbots Inteligentes para WhatsApp -->
+        <div class="script-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="display: flex; align-items: center; gap: 8px;">
+              🤖 Chatbots WhatsApp 24/7
+            </h3>
+            <span class="pill pill-srv-chatbot">530 € + 25 €/mes</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">
+            Enfoque: Respuestas instantáneas día y noche, reservas automáticas y captura de pedidos sin perder llamadas.
+          </p>
+          <div class="script-body" id="scriptChatbot">"Hola [Nombre del Negocio], os contacto desde JRG Agency (https://jrgagency.eus).
+
+Sabemos que en las horas con más trabajo en [Municipio] es muy difícil contestar al WhatsApp al instante, y los clientes que tardan en recibir respuesta acaban yéndose a la competencia.
+
+Configuramos Asistentes Inteligentes para WhatsApp que atienden 24/7 en segundos: resuelven dudas, gestionan reservas o pedidos y os dejan todo listo en el panel (530 € de configuración inicial y 25 €/mes de mantenimiento continuo).
+
+¿Te gustaría probar una demo en tu móvil durante 30 segundos para ver cómo funciona? Mila esker!"</div>
+          <button class="btn btn-outline" style="width: 100%; margin-top: 14px;" data-copy-target="scriptChatbot">
+            📋 Copiar Pitch Chatbot
+          </button>
+        </div>
+
+        <!-- Pitch 3: Automatizaciones IA -->
+        <div class="script-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="display: flex; align-items: center; gap: 8px;">
+              ⚡ Automatizaciones de Procesos
+            </h3>
+            <span class="pill pill-srv-auto">900 € - 1.400 €</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">
+            Enfoque: Eliminación de tareas repetitivas, conexión de WhatsApp con CRM/ERP y agendamiento sin errores.
+          </p>
+          <div class="script-body" id="scriptAuto">"Kaixo [Nombre del Negocio]! Os escribo de parte de JRG Agency (https://jrgagency.eus).
+
+Hemos estado analizando empresas de [Municipio] y vemos que muchas horas de la semana se pierden pasando presupuestos a mano, anotando citas o sincronizando correos con la facturación.
+
+Creamos flujos automatizados a medida (entre 900 € y 1.400 € según complejidad) que conectan vuestro teléfono y sistemas para ahorrar más del 70% del trabajo administrativo repetitivo.
+
+¿Tendríais 5 minutos esta semana para ver un ejemplo aplicado directamente a vuestro sector? ¡Un saludo!"</div>
+          <button class="btn btn-outline" style="width: 100%; margin-top: 14px;" data-copy-target="scriptAuto">
+            📋 Copiar Pitch Automatización
+          </button>
+        </div>
+
+        <!-- Pitch 4: Pack Completo -->
+        <div class="script-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="display: flex; align-items: center; gap: 8px;">
+              🚀 Pack Digital Integral
+            </h3>
+            <span class="pill" style="background: rgba(37, 211, 102, 0.15); color: #4ade80; border: 1px solid rgba(37, 211, 102, 0.3);">Web + Chatbot + Auto</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">
+            Enfoque: Transformación digital de punta a punta (Web 460 € + Chatbot 530 € + Automatización a medida).
+          </p>
+          <div class="script-body" id="scriptPack">"Kaixo [Nombre del Negocio]! Os escribo desde JRG Agency (https://jrgagency.eus).
+
+Ayudamos a empresas de la zona a renovar por completo su captación y operativa comercial:
+1. Nueva Web de alta conversión (460 €).
+2. Chatbot en WhatsApp para atender y agendar 24/7 (530 € + 25 €/mes).
+3. Automatización de facturas, pedidos y recordatorios sin intervención manual.
+
+¿Cuándo tendríais 10 minutos para una llamada rápida y ver cómo podemos implementarlo este mes? Un saludo cordial."</div>
+          <button class="btn btn-outline" style="width: 100%; margin-top: 14px;" data-copy-target="scriptPack">
+            📋 Copiar Pitch Pack Completo
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 5: PANEL DE ADMINISTRADOR / SUPERVISIÓN DE SALMAN
+         ==================================================================== -->
+    <section class="view-content" id="viewAdmin" style="display: none;">
+      <div style="width: 100%;">
+        <div class="admin-header-row">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <h2 style="font-size: 18px; font-weight: 700; color: #ffffff;">Panel de Supervisión — Actividad de Salman</h2>
+              <span class="admin-badge-pulse">
+                <span class="admin-pulse-dot"></span> AUDITORÍA EN TIEMPO REAL
+              </span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">
+              Seguimiento de propuestas enviadas, contactos por WhatsApp, cambios de pipeline y cierres realizados por salman_jrg.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline" id="exportAuditCsvBtn" style="font-size: 12px; padding: 8px 14px;">
+              📥 Exportar Auditoría CSV
+            </button>
+            <button class="btn btn-outline" id="clearAuditLogsBtn" style="font-size: 12px; padding: 8px 14px; color: #f87171; border-color: rgba(239, 68, 68, 0.3);">
+              🗑️ Limpiar Historial
+            </button>
+          </div>
+        </div>
+
+        <!-- Admin Bento KPIs for Salman -->
+        <div class="bento-grid" style="padding: 0;">
+          <div class="bento-card col-span-3">
+            <div class="bento-card-header">
+              <span class="bento-card-title">PROPUESTAS DE SALMAN</span>
+              <div class="bento-card-icon" style="color: var(--accent-purple);">📑</div>
+            </div>
+            <div class="bento-metric-val" id="adminKpiProposals" style="color: #c084fc;">0</div>
+            <div class="bento-metric-sub">
+              Propuestas formales registradas
+            </div>
+          </div>
+
+          <div class="bento-card col-span-3">
+            <div class="bento-card-header">
+              <span class="bento-card-title">VOLUMEN PRESUPUESTADO</span>
+              <div class="bento-card-icon" style="color: var(--accent-wa);">💶</div>
+            </div>
+            <div class="bento-metric-val green" id="adminKpiBudget">0 €</div>
+            <div class="bento-metric-sub" id="adminKpiBudgetSub">
+              +0 €/mes en cuotas de chatbots
+            </div>
+          </div>
+
+          <div class="bento-card col-span-3">
+            <div class="bento-card-header">
+              <span class="bento-card-title">CIERRES / GANADOS</span>
+              <div class="bento-card-icon" style="color: var(--accent-amber);">🏆</div>
+            </div>
+            <div class="bento-metric-val" id="adminKpiWon" style="color: #fbbf24;">0</div>
+            <div class="bento-metric-sub">
+              Clientes en sprint o cerrados
+            </div>
+          </div>
+
+          <div class="bento-card col-span-3">
+            <div class="bento-card-header">
+              <span class="bento-card-title">TOTAL ACCIONES SALMAN</span>
+              <div class="bento-card-icon" style="color: #38bdf8;">⚡</div>
+            </div>
+            <div class="bento-metric-val" id="adminKpiTotalActions" style="color: #38bdf8;">0</div>
+            <div class="bento-metric-sub" id="adminKpiLastActive">
+              Última actividad: Sin registros
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Feed & Log Table -->
+        <div class="activity-feed-wrapper">
+          <div class="activity-feed-controls">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <span style="font-weight: 600; font-size: 13px; color: #ffffff;">Historial de Operaciones</span>
+              <span class="mono-tag" id="adminLogCountBadge" style="font-size: 10px; color: var(--text-dim);">0 eventos</span>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <select class="filter-select" id="adminFilterAction" style="font-size: 11px; padding: 6px 10px;">
+                <option value="">Todas las Acciones</option>
+                <option value="proposal_sent">📑 Propuestas Enviadas</option>
+                <option value="status_change">🔄 Cambios de Fase</option>
+                <option value="pricing_update">💰 Ajustes de Precio</option>
+                <option value="whatsapp_opened">💬 Contactos WhatsApp</option>
+                <option value="note_edit">📝 Notas Guardadas</option>
+                <option value="login">🔑 Inicios de Sesión</option>
+              </select>
+              <input type="text" id="adminSearchLog" class="filter-select" style="font-size: 11px; padding: 6px 10px; min-width: 180px;" placeholder="Buscar cliente...">
+            </div>
+          </div>
+
+          <div style="overflow-x: auto; max-height: 480px; overflow-y: auto;">
+            <table class="activity-log-table">
+              <thead>
+                <tr>
+                  <th style="width: 140px;">Fecha / Hora</th>
+                  <th style="width: 110px;">Usuario</th>
+                  <th style="width: 160px;">Tipo de Acción</th>
+                  <th>Cliente / Lead Afectado</th>
+                  <th>Detalles de la Operación</th>
+                </tr>
+              </thead>
+              <tbody id="adminActivityTableBody">
+                <!-- Logs renderizados dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================
+       MODAL: FICHA DEL LEAD & CONFIGURADOR DE PROPUESTA
+       ====================================================================== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="lead-id" id="modalId">ID-000</span>
+            <span class="badge badge-emerald" id="modalLocationBadge">Gipuzkoa</span>
+          </div>
+          <h3 class="modal-title" id="modalTitle">Nombre de la Empresa</h3>
+          <p class="modal-subtitle" id="modalSubtitle">Sector • Municipio</p>
+          <div class="modal-badges-row" id="modalBadges"></div>
+        </div>
+        <button class="close-btn" id="modalCloseBtn">&times;</button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- Quick Action Bar -->
+        <div class="modal-actions" style="margin-top: 0; margin-bottom: 6px; display: flex; gap: 8px;">
+          <button class="btn btn-wa" id="modalWhatsappBtn" style="flex: 1.2;">
+            <span>💬</span> Enviar Propuesta WhatsApp
+          </button>
+          <button class="btn btn-outline" id="modalMarkPropuestaBtn" style="flex: 1.2; border-color: rgba(37, 211, 102, 0.4); color: var(--accent-wa);">
+            <span>📑</span> Marcar Propuesta Enviada
+          </button>
+          <a href="#" class="btn btn-outline" id="modalCallBtn">
+            <span>📞</span> Llamar
+          </a>
+          <a href="#" target="_blank" class="btn btn-outline" id="modalMapsBtn" title="Ver en Google Maps">
+            <span>📍</span> Maps
+          </a>
+        </div>
+
+        <!-- Servicios & Tarifas -->
+        <div class="detail-section">
+          <h4>⚙️ SERVICIOS & PRESUPUESTO PERSONALIZADO</h4>
+          
+          <div class="service-toggle-group">
+            <!-- Web -->
+            <label class="service-toggle-card" id="cardToggleWeb">
+              <div class="service-toggle-left">
+                <input type="checkbox" id="modalCheckWeb">
+                <span class="service-toggle-title">🌐 Desarrollo Web (Pago único)</span>
+              </div>
+              <span class="service-toggle-price">460 €</span>
+            </label>
+
+            <!-- Chatbot -->
+            <label class="service-toggle-card" id="cardToggleChatbot">
+              <div class="service-toggle-left">
+                <input type="checkbox" id="modalCheckChatbot">
+                <span class="service-toggle-title">🤖 Chatbot IA WhatsApp (Atención 24/7)</span>
+              </div>
+              <span class="service-toggle-price">530 € + 25 €/mes</span>
+            </label>
+
+            <!-- Automatización -->
+            <label class="service-toggle-card" id="cardToggleAuto">
+              <div class="service-toggle-left">
+                <input type="checkbox" id="modalCheckAuto">
+                <span class="service-toggle-title">⚡ Automatizaciones IA (Flujos y Procesos)</span>
+              </div>
+              <span class="service-toggle-price" id="modalAutoPriceLabel">1.150 €</span>
+            </label>
+
+            <!-- Slider Automatizaciones -->
+            <div class="automation-slider-wrap" id="modalAutoSliderWrap" style="display: none;">
+              <div class="automation-slider-header">
+                <span>RANGO DE AUTOMATIZACIÓN (900 € - 1.400 €):</span>
+                <span id="modalAutoSliderVal" style="color: var(--accent-purple); font-weight: 700;">1.150 €</span>
+              </div>
+              <input type="range" min="900" max="1400" step="50" value="1150" class="automation-range" id="modalAutoRange">
+            </div>
+          </div>
+
+          <!-- Resumen de Presupuesto -->
+          <div class="pricing-summary-box">
+            <div class="pricing-summary-item">
+              <div class="pricing-summary-label">Total Pago Único</div>
+              <div class="pricing-summary-val" id="modalSummaryUpfront">0 €</div>
+            </div>
+            <div class="pricing-summary-item">
+              <div class="pricing-summary-label">Cuota Mensual (MRR)</div>
+              <div class="pricing-summary-val mrr" id="modalSummaryMRR">0 €/mes</div>
+            </div>
+          </div>
+
+          <div class="detail-grid-2">
+            <!-- Categoría de Negocio -->
+            <div>
+              <label class="field-label">Categoría de Negocio:</label>
+              <select class="filter-select" id="modalCategoriaSelect" style="width: 100%;">
+                <option value="Restauración / Hostelería">🍽️ Restauración / Hostelería</option>
+                <option value="PYME / Empresa">🏢 PYME / Empresa</option>
+                <option value="Comercio / Autónomo">🛍️ Comercio / Autónomo</option>
+              </select>
+            </div>
+
+            <!-- Fase del Pipeline -->
+            <div>
+              <label class="field-label">Fase del Pipeline:</label>
+              <select class="filter-select" id="modalStatusSelect" style="width: 100%;">
+                <option value="INBOX / LEADS">📥 INBOX / LEADS</option>
+                <option value="CALIFICACIÓN">🔍 CALIFICACIÓN</option>
+                <option value="PROPUESTA ENVIADA">📑 PROPUESTA ENVIADA</option>
+                <option value="EN DESARROLLO / SPRINT">⚡ EN DESARROLLO / SPRINT</option>
+                <option value="CERRADO GANADO">🏆 CERRADO GANADO</option>
+                <option value="EN ESPERA / SEGUIMIENTO">⏳ EN ESPERA / SEGUIMIENTO</option>
+                <option value="DESCARTADO / CADENA">🏢 DESCARTADO / CADENA</option>
+                <option value="DESCARTADO / DUPLICADO">⚠️ DESCARTADO / DUPLICADO</option>
+              </select>
+            </div>
+
+            <!-- Canal de Entrada -->
+            <div>
+              <label class="field-label">Canal de Entrada:</label>
+              <select class="filter-select" id="modalCanalSelect" style="width: 100%;">
+                <option value="WhatsApp">💬 WhatsApp</option>
+                <option value="Formulario Web">🌐 Formulario Web</option>
+                <option value="Google Business Local">📍 Google Business Local</option>
+                <option value="Referido">🤝 Referido</option>
+              </select>
+            </div>
+
+            <!-- Ubicación -->
+            <div>
+              <label class="field-label">Ubicación:</label>
+              <select class="filter-select" id="modalUbicacionSelect" style="width: 100%;">
+                <option value="Gipuzkoa (Local)">📍 Gipuzkoa (Local)</option>
+                <option value="España (Nacional)">🇪🇸 España (Nacional)</option>
+                <option value="Internacional">🌍 Internacional</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Propuesta y Pitch -->
+        <div class="detail-section">
+          <h4>💡 PROPUESTA DE VALOR & MENSAJE DE OUTREACH</h4>
+          <div id="modalServiceDesc" style="font-weight: 700; color: #ffffff; font-size: 14px;"></div>
+          <div class="pitch-box" id="modalPitch"></div>
+
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <button class="btn btn-outline" style="font-size: 11px; padding: 6px 12px;" id="modalCopyPitchBtn">
+              📋 Copiar Pitch Castellano
+            </button>
+            <button class="btn btn-outline" style="font-size: 11px; padding: 6px 12px;" id="modalCopyEuPitchBtn">
+              📋 Copiar Pitch Euskara
+            </button>
+          </div>
+        </div>
+
+        <!-- Notas de Seguimiento -->
+        <div class="detail-section">
+          <h4>📝 NOTAS PRIVADAS & HISTORIAL DEL CLIENTE</h4>
+          <textarea class="notes-area" id="modalNotes" placeholder="Escribe aquí acuerdos de reuniones, estado de conversaciones, fecha del sprint, objeciones o requisitos técnicos..."></textarea>
+          <div style="font-size: 10px; color: var(--text-dim); margin-top: 6px; font-family: 'Geist Mono', monospace;">
+            ✓ Sincronizado automáticamente en almacenamiento persistente.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="crm-toast" id="toast">Operación completada</div>
+
+  <!-- Scripts -->
+  <script src="leads_data.js"></script>
+  <script src="crm_app.js"></script>
+</body>
+</html>
