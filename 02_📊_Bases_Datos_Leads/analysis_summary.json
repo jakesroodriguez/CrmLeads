@@ -1,0 +1,55 @@
+{
+  "sector_counts": {
+    "Comercio Minorista y Otros": 363,
+    "Hostelería y Restauración": 76,
+    "Alimentación y Frescos": 23,
+    "Comercio Minorista y Moda": 61,
+    "Salud y Bienestar": 29,
+    "Formación, Ocio y Otros": 18,
+    "Belleza y Cuidado Personal": 23,
+    "Servicios Profesionales": 41,
+    "Industria y Fabricación": 23,
+    "Hogar, Reformas y Gremios": 23,
+    "Automoción y Talleres": 3
+  },
+  "town_sector": {
+    "Legazpi": {
+      "Comercio Minorista y Otros": 121,
+      "Hostelería y Restauración": 24,
+      "Alimentación y Frescos": 10,
+      "Comercio Minorista y Moda": 16,
+      "Salud y Bienestar": 12,
+      "Formación, Ocio y Otros": 5,
+      "Belleza y Cuidado Personal": 9,
+      "Servicios Profesionales": 11,
+      "Industria y Fabricación": 8,
+      "Hogar, Reformas y Gremios": 2,
+      "Automoción y Talleres": 1
+    },
+    "Urretxu": {
+      "Hostelería y Restauración": 24,
+      "Comercio Minorista y Otros": 105,
+      "Servicios Profesionales": 16,
+      "Belleza y Cuidado Personal": 9,
+      "Hogar, Reformas y Gremios": 8,
+      "Industria y Fabricación": 10,
+      "Alimentación y Frescos": 6,
+      "Comercio Minorista y Moda": 9,
+      "Salud y Bienestar": 6,
+      "Formación, Ocio y Otros": 5
+    },
+    "Zumarraga": {
+      "Comercio Minorista y Moda": 36,
+      "Salud y Bienestar": 11,
+      "Comercio Minorista y Otros": 137,
+      "Industria y Fabricación": 5,
+      "Belleza y Cuidado Personal": 5,
+      "Servicios Profesionales": 14,
+      "Hogar, Reformas y Gremios": 13,
+      "Hostelería y Restauración": 28,
+      "Formación, Ocio y Otros": 8,
+      "Alimentación y Frescos": 7,
+      "Automoción y Talleres": 2
+    }
+  }
+}

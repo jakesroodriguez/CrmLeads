@@ -1,0 +1,695 @@
+[
+  {
+    "id": 58,
+    "nombre": "Eroski Center Legazpi Kale Nagusia",
+    "cadena": "Eroski (Center / City / Rapid / Bidaiak)",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Legazpi",
+    "direccion": "Kale Nagusia, 15",
+    "telefono": "943730899"
+  },
+  {
+    "id": 59,
+    "nombre": "Eroski Center Legazpi Laubide",
+    "cadena": "Eroski (Center / City / Rapid / Bidaiak)",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Legazpi",
+    "direccion": "Laubide, 12",
+    "telefono": "659839305"
+  },
+  {
+    "id": 295,
+    "nombre": "Eroski Center Urretxu",
+    "cadena": "Eroski (Center / City / Rapid / Bidaiak)",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Urretxu",
+    "direccion": "Pl.Gernikako Arbola, 20700 Urretxu, Gipuzkoa",
+    "telefono": "943 72 58 96"
+  },
+  {
+    "id": 506,
+    "nombre": "Eroski Bidaiak Zumarraga",
+    "cadena": "Eroski (Center / City / Rapid / Bidaiak)",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Zumarraga",
+    "direccion": "Sekundino Esnaola, 28",
+    "telefono": "943726048"
+  },
+  {
+    "id": 507,
+    "nombre": "Eroski Center Zumarraga",
+    "cadena": "Eroski (Center / City / Rapid / Bidaiak)",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Zumarraga",
+    "direccion": "Urdaneta, 2-4",
+    "telefono": "943726289"
+  },
+  {
+    "id": 862,
+    "nombre": "EROSKI city",
+    "cadena": "Eroski (Center / City / Rapid / Bidaiak)",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Beasain",
+    "direccion": "Zaldizurreta Kalea, s/n, 20200 Beasain, Gipuzkoa",
+    "telefono": "943 88 38 43"
+  },
+  {
+    "id": 1245,
+    "nombre": "EROSKI city",
+    "cadena": "Eroski (Center / City / Rapid / Bidaiak)",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Lazkao",
+    "direccion": "C. Areso, 24, 20210 Lazkao, Gipuzkoa",
+    "telefono": "943 88 16 99"
+  },
+  {
+    "id": 1363,
+    "nombre": "EROSKI rapid",
+    "cadena": "Eroski (Center / City / Rapid / Bidaiak)",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Olaberria",
+    "direccion": "Basozabal Industrialdea, 2, 20212 Olaberria, Gipuzkoa",
+    "telefono": "943 16 21 52"
+  },
+  {
+    "id": 1453,
+    "nombre": "EROSKI",
+    "cadena": "Eroski (Center / City / Rapid / Bidaiak)",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Ordizia",
+    "direccion": "San Bartolome Kalea, 7, 20240 Ordizia, Gipuzkoa",
+    "telefono": "943 88 41 90"
+  },
+  {
+    "id": 1454,
+    "nombre": "EROSKI city",
+    "cadena": "Eroski (Center / City / Rapid / Bidaiak)",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Ordizia",
+    "direccion": "Filipinak K., 10, 20240 Ordizia, Gipuzkoa",
+    "telefono": "943 16 12 15"
+  },
+  {
+    "id": 1804,
+    "nombre": "EROSKI city",
+    "cadena": "Eroski (Center / City / Rapid / Bidaiak)",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Zegama",
+    "direccion": "Elizalde Kalea, 5, 20215 Zegama, Gipuzkoa",
+    "telefono": "943 80 11 37"
+  },
+  {
+    "id": 653,
+    "nombre": "Supermercados Covirán",
+    "cadena": "Covirán",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Zumarraga",
+    "direccion": "Iparraguirre Hiribidea, 4, 20700 Zumarraga, Gipuzkoa",
+    "telefono": ""
+  },
+  {
+    "id": 694,
+    "nombre": "Covirán Legorreta",
+    "cadena": "Covirán",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Arama",
+    "direccion": "Kale Nagusia, 20, 20250 Legorreta, Gipuzkoa",
+    "telefono": "901 11 69 95"
+  },
+  {
+    "id": 1069,
+    "nombre": "Supermercado Covirán Beasain",
+    "cadena": "Covirán",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Beasain",
+    "direccion": "Kale Nagusia Kalea, 23, 20200 Beasain, Gipuzkoa",
+    "telefono": ""
+  },
+  {
+    "id": 1243,
+    "nombre": "Covirán supermerkatua",
+    "cadena": "Covirán",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Lazkao",
+    "direccion": "20210 Lazkao, Guipúzcoa",
+    "telefono": ""
+  },
+  {
+    "id": 1802,
+    "nombre": "Covirán",
+    "cadena": "Covirán",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Zegama",
+    "direccion": "Santa Barbara Kalea, 1, 20215 Zegama, Gipuzkoa",
+    "telefono": "943 80 15 66"
+  },
+  {
+    "id": 187,
+    "nombre": "Super BM Legazpi",
+    "cadena": "BM Supermercados",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Legazpi",
+    "direccion": "Fleming Dr., 3-5",
+    "telefono": "943731442"
+  },
+  {
+    "id": 250,
+    "nombre": "BM Supermercados",
+    "cadena": "BM Supermercados",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Urretxu",
+    "direccion": "Labeaga Kalea, 33, 20700 Urretxu, Gipuzkoa",
+    "telefono": "943 72 22 06"
+  },
+  {
+    "id": 800,
+    "nombre": "BM Supermercados",
+    "cadena": "BM Supermercados",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Beasain",
+    "direccion": "Centro Comercial, Senpere Kalea, 20200 Beasain, Gipuzkoa",
+    "telefono": "943 16 02 50"
+  },
+  {
+    "id": 5,
+    "nombre": "Alcampo Legazpi",
+    "cadena": "Alcampo",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Legazpi",
+    "direccion": "Elbarrena, 18",
+    "telefono": "943730000"
+  },
+  {
+    "id": 6,
+    "nombre": "Alcampo Supermerkatua",
+    "cadena": "Alcampo",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Legazpi",
+    "direccion": "El barrena, 18, A, 20230 Legazpi, Gipuzkoa",
+    "telefono": "913 68 78 57"
+  },
+  {
+    "id": 837,
+    "nombre": "Carrefour",
+    "cadena": "Carrefour / Carrefour Express",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Beasain",
+    "direccion": "Polígono Industrial, 201 Barrio, 20212 Yurre",
+    "telefono": "943 88 03 33"
+  },
+  {
+    "id": 838,
+    "nombre": "Carrefour Express",
+    "cadena": "Carrefour / Carrefour Express",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Beasain",
+    "direccion": "San Inazio Kalea, 7, 20200 Beasain, Gipuzkoa",
+    "telefono": "914 90 89 00"
+  },
+  {
+    "id": 1298,
+    "nombre": "Mercadona",
+    "cadena": "Mercadona",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Lazkao",
+    "direccion": "Hiribarren Kalea, 38, 20210 Lazkao, Gipuzkoa",
+    "telefono": "943 06 05 78"
+  },
+  {
+    "id": 1388,
+    "nombre": "Lidl",
+    "cadena": "Lidl",
+    "sector_cadena": "Supermercados y Gran Distribución",
+    "municipio": "Olaberria",
+    "direccion": "Basozabal Ind, 7-8, 20212 Olaberria, Gipuzkoa",
+    "telefono": "900 958 311"
+  },
+  {
+    "id": 117,
+    "nombre": "LABORAL Kutxa Legazpi",
+    "cadena": "Laboral Kutxa",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Legazpi",
+    "direccion": "Patrizio Etxeberria Kalea, 3, 20230 Legazpi, Gipuzkoa",
+    "telefono": "943 73 07 48"
+  },
+  {
+    "id": 340,
+    "nombre": "LABORAL Kutxa Urretxu",
+    "cadena": "Laboral Kutxa",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Urretxu",
+    "direccion": "Areizaga Kalea, 1, 20700 Urretxu, Gipuzkoa",
+    "telefono": "943 72 06 06"
+  },
+  {
+    "id": 562,
+    "nombre": "LABORAL Kutxa Zumarraga",
+    "cadena": "Laboral Kutxa",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Zumarraga",
+    "direccion": "Secundino Esnaola Kalea, 18, 20700 Zumarraga, Gipuzkoa",
+    "telefono": "943 72 22 04"
+  },
+  {
+    "id": 1170,
+    "nombre": "LABORAL Kutxa Idiazabal",
+    "cadena": "Laboral Kutxa",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Idiazabal",
+    "direccion": "Kale Nagusia Kalea, 11, 20213 Idiazabal, Gipuzkoa",
+    "telefono": "943 18 71 14"
+  },
+  {
+    "id": 1283,
+    "nombre": "LABORAL Kutxa Lazkao",
+    "cadena": "Laboral Kutxa",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Lazkao",
+    "direccion": "Elosegi Kalea, 12, 20210 Lazkao, Gipuzkoa",
+    "telefono": "943 88 24 12"
+  },
+  {
+    "id": 1535,
+    "nombre": "LABORAL Kutxa Ordizia",
+    "cadena": "Laboral Kutxa",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Ordizia",
+    "direccion": "Kale Nagusia, 9, 20240 Ordizia, Gipuzkoa",
+    "telefono": "943 88 61 50"
+  },
+  {
+    "id": 1660,
+    "nombre": "LABORAL Kutxa Ormaiztegi",
+    "cadena": "Laboral Kutxa",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Ormaiztegi",
+    "direccion": "Plaza Maiora, s/n, 20216 Ormaiztegi, Gipuzkoa",
+    "telefono": "943 80 53 55"
+  },
+  {
+    "id": 1282,
+    "nombre": "Kutxabank",
+    "cadena": "Kutxabank",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Lazkao",
+    "direccion": "Uhaitz Kalea, 1, 20210 Lazkao, Gipuzkoa",
+    "telefono": "943 08 60 31"
+  },
+  {
+    "id": 1533,
+    "nombre": "Kutxabank",
+    "cadena": "Kutxabank",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Ordizia",
+    "direccion": "Plaza Nagusia, 1, 20240 Ordizia, Gipuzkoa",
+    "telefono": "943 08 99 51"
+  },
+  {
+    "id": 1770,
+    "nombre": "Kutxabank",
+    "cadena": "Kutxabank",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Zaldibia",
+    "direccion": "Santa Fe Kalea, 23 OFICINA, 20247 Zaldibia, Gipuzkoa",
+    "telefono": "943 88 28 71"
+  },
+  {
+    "id": 450,
+    "nombre": "BBVA",
+    "cadena": "BBVA",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Zumarraga",
+    "direccion": "Calle J. M. Iparraguirre, 12, 20700 Zumarraga, Gipuzkoa",
+    "telefono": "943 72 15 11"
+  },
+  {
+    "id": 452,
+    "nombre": "Banco Sabadell Guipuzcoano",
+    "cadena": "Banco Sabadell",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Zumarraga",
+    "direccion": "Iparraguirre Hiribidea, 6, 20700 Zumarraga, Gipuzkoa",
+    "telefono": "943 72 25 00"
+  },
+  {
+    "id": 453,
+    "nombre": "Banco Santander",
+    "cadena": "Banco Santander",
+    "sector_cadena": "Banca y Finanzas",
+    "municipio": "Zumarraga",
+    "direccion": "Secundino Esnaola Kalea, 2, 20700 Zumarraga, Gipuzkoa",
+    "telefono": "943 72 14 00"
+  },
+  {
+    "id": 159,
+    "nombre": "Ogiberri Kale Nagusia",
+    "cadena": "Ogi Berri",
+    "sector_cadena": "Panaderías y Cafeterías de Cadena",
+    "municipio": "Legazpi",
+    "direccion": "Legazpi, Gipuzkoa",
+    "telefono": "943 03 79 93"
+  },
+  {
+    "id": 160,
+    "nombre": "Ogiberri Legazpi",
+    "cadena": "Ogi Berri",
+    "sector_cadena": "Panaderías y Cafeterías de Cadena",
+    "municipio": "Legazpi",
+    "direccion": "Lanaren Hiribidea, 2 / Kale Nagusia, 12",
+    "telefono": "943730972"
+  },
+  {
+    "id": 368,
+    "nombre": "Ogi Berri Adore",
+    "cadena": "Ogi Berri",
+    "sector_cadena": "Panaderías y Cafeterías de Cadena",
+    "municipio": "Urretxu",
+    "direccion": "Labeaga Kalea, 51, 20700 Urretxu, Gipuzkoa",
+    "telefono": "943 72 00 33"
+  },
+  {
+    "id": 607,
+    "nombre": "Ogiberri Zumarraga",
+    "cadena": "Ogi Berri",
+    "sector_cadena": "Panaderías y Cafeterías de Cadena",
+    "municipio": "Zumarraga",
+    "direccion": "Urdaneta hiribidea, 5",
+    "telefono": "943720033"
+  },
+  {
+    "id": 1393,
+    "nombre": "Ogi Berri ADORE III",
+    "cadena": "Ogi Berri",
+    "sector_cadena": "Panaderías y Cafeterías de Cadena",
+    "municipio": "Olaberria",
+    "direccion": "Pl. de los Leturia, 2, 20700 Zumarraga, Gipuzkoa",
+    "telefono": "943 53 46 26"
+  },
+  {
+    "id": 425,
+    "nombre": "Allianz Seguros",
+    "cadena": "Allianz",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Zumarraga",
+    "direccion": "Piedad Kalea, 4, 20700 Zumarraga, Gipuzkoa",
+    "telefono": "943 72 53 04"
+  },
+  {
+    "id": 763,
+    "nombre": "Allianz",
+    "cadena": "Allianz",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Beasain",
+    "direccion": "Joan Iturralde Kalea, 11, 20200 Beasain, Gipuzkoa",
+    "telefono": ""
+  },
+  {
+    "id": 764,
+    "nombre": "Allianz Seguros - Agencia Oihana Larrarte Eceiza",
+    "cadena": "Allianz",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Beasain",
+    "direccion": "Oriako Pasealekua Ibilbidea, 20, 20200 Beasain, Gipuzkoa",
+    "telefono": "943 88 87 02"
+  },
+  {
+    "id": 1122,
+    "nombre": "Allianz Seguros - Agencia Zelia Telleria AZURMENDI",
+    "cadena": "Allianz",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Idiazabal",
+    "direccion": "Cs Caerio Zabara 194, 20213 Idiazabal, Gipuzkoa",
+    "telefono": "609 53 13 08"
+  },
+  {
+    "id": 1678,
+    "nombre": "Allianz Seguros - Agente Ione Albizu Tellería",
+    "cadena": "Allianz",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Segura",
+    "direccion": "MAYOR, 2, 20214 Segura, Gipuzkoa",
+    "telefono": "943 80 11 74"
+  },
+  {
+    "id": 366,
+    "nombre": "Occident - Agencia de seguros Caracil",
+    "cadena": "Occident / Catalana Occidente",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Urretxu",
+    "direccion": "Ipeñarrieta Kalea, 4, BAJ, 20700 Urretxu, Gipuzkoa",
+    "telefono": "943 72 05 06"
+  },
+  {
+    "id": 367,
+    "nombre": "Occident - Agencia de seguros Codenet",
+    "cadena": "Occident / Catalana Occidente",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Urretxu",
+    "direccion": "Labeaga Kalea, 52, 20700 Urretxu, Gipuzkoa",
+    "telefono": "943 72 42 22"
+  },
+  {
+    "id": 1018,
+    "nombre": "Occident - Agencia de seguros Angel Vazquez Iglesias",
+    "cadena": "Occident / Catalana Occidente",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Beasain",
+    "direccion": "San Inazio Kalea, 8, 20200 Beasain, Gipuzkoa",
+    "telefono": "943 16 14 96"
+  },
+  {
+    "id": 1574,
+    "nombre": "Occident - Agencia de seguros Miren Argiñe Caballero Manjarres",
+    "cadena": "Occident / Catalana Occidente",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Ordizia",
+    "direccion": "Jose Migel Barandiaran Plaza, 1, 20240 Ordizia, Gipuzkoa",
+    "telefono": "943 54 73 28"
+  },
+  {
+    "id": 587,
+    "nombre": "Mapfre",
+    "cadena": "Mapfre",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Zumarraga",
+    "direccion": "Secundino Esnaola Kalea, 6, 20700 Zumarraga, Gipuzkoa",
+    "telefono": "943 72 20 00"
+  },
+  {
+    "id": 994,
+    "nombre": "Mapfre",
+    "cadena": "Mapfre",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Beasain",
+    "direccion": "Urbialde Plaza, 1, 20200 Beasain, Gipuzkoa",
+    "telefono": "943 80 40 50"
+  },
+  {
+    "id": 1293,
+    "nombre": "Mapfre",
+    "cadena": "Mapfre",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Lazkao",
+    "direccion": "Jose Lasa Hiribidea, 3, 20210 Lazkao, Gipuzkoa",
+    "telefono": "943 16 13 61"
+  },
+  {
+    "id": 1556,
+    "nombre": "Mapfre",
+    "cadena": "Mapfre",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Ordizia",
+    "direccion": "Urdaneta Kalea, 12, 20240 Ordizia, Gipuzkoa",
+    "telefono": "943 88 46 46"
+  },
+  {
+    "id": 222,
+    "nombre": "Agencia Generali Seguros",
+    "cadena": "Generali Seguros",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Urretxu",
+    "direccion": "Labeaga Kalea, 27, Bajo, 20700 Urretxu, Gipuzkoa",
+    "telefono": "843 68 61 46"
+  },
+  {
+    "id": 755,
+    "nombre": "Agencia Generali Seguros",
+    "cadena": "Generali Seguros",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Beasain",
+    "direccion": "Esteban Lasa Kalea, 5, 20200 Beasain, Gipuzkoa",
+    "telefono": "843 68 61 56"
+  },
+  {
+    "id": 1406,
+    "nombre": "Agencia Generali Seguros",
+    "cadena": "Generali Seguros",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Ordizia",
+    "direccion": "Garagartza Plaza, 8, 20240 Ordizia, Gipuzkoa",
+    "telefono": "943 90 23 89"
+  },
+  {
+    "id": 220,
+    "nombre": "AXA Seguros: Servicios Integrales Briones",
+    "cadena": "AXA Seguros",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Urretxu",
+    "direccion": "Labeaga Kalea, 46, 20700 Urretxu, Gipuzkoa",
+    "telefono": "943 72 58 10"
+  },
+  {
+    "id": 752,
+    "nombre": "AXA Oficina Seguros Bikote (Beasain)",
+    "cadena": "AXA Seguros",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Beasain",
+    "direccion": "Zaldizurreta Kalea, 19, 20200 Beasain, Gipuzkoa",
+    "telefono": "943 02 71 21"
+  },
+  {
+    "id": 223,
+    "nombre": "Agencia de Santalucía Seguros",
+    "cadena": "Santalucía Seguros",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Urretxu",
+    "direccion": "Labeaga Kalea, 50, 20700 Urretxu, Gipuzkoa",
+    "telefono": "943 79 96 28"
+  },
+  {
+    "id": 392,
+    "nombre": "Reale Seguros",
+    "cadena": "Reale Seguros",
+    "sector_cadena": "Aseguradoras y Agencias",
+    "municipio": "Urretxu",
+    "direccion": "Gernikako Arbola Plaza, 4, 20700 Urretxu, Gipuzkoa",
+    "telefono": "635 54 20 64"
+  },
+  {
+    "id": 756,
+    "nombre": "Agencia distribuidora y Servicio mantenimiento de gas butano y propano Repsol - GASGARIN SA",
+    "cadena": "Repsol (Estaciones y Distribución)",
+    "sector_cadena": "Estaciones de Servicio y Combustible",
+    "municipio": "Beasain",
+    "direccion": "JOSE MIGUEL ITURRIOZ, Andre Mari Kalea, 16, BJ, 20200 Beasain, Gipuzkoa",
+    "telefono": "943 88 25 76"
+  },
+  {
+    "id": 859,
+    "nombre": "Distribuidor Comercial de Gasóleos Repsol",
+    "cadena": "Repsol (Estaciones y Distribución)",
+    "sector_cadena": "Estaciones de Servicio y Combustible",
+    "municipio": "Beasain",
+    "direccion": "Ctra. Gi 632 P.K. 1,9, 20200 Beasain, Gipuzkoa",
+    "telefono": ""
+  },
+  {
+    "id": 878,
+    "nombre": "Estación de Servicio Repsol",
+    "cadena": "Repsol (Estaciones y Distribución)",
+    "sector_cadena": "Estaciones de Servicio y Combustible",
+    "municipio": "Beasain",
+    "direccion": "Gi-632, 1 DE, 20218 Beasain, Gipuzkoa",
+    "telefono": "943 16 24 70"
+  },
+  {
+    "id": 709,
+    "nombre": "AVIA - ZUBIKOETA",
+    "cadena": "Avia",
+    "sector_cadena": "Estaciones de Servicio y Combustible",
+    "municipio": "Ataun",
+    "direccion": "Zubikoeta Industrigunea Kalea, 20211 Guipúzcoa, Gipuzkoa",
+    "telefono": "943 18 04 86"
+  },
+  {
+    "id": 262,
+    "nombre": "CLAREL",
+    "cadena": "Clarel",
+    "sector_cadena": "Cuidado Personal y Droguería",
+    "municipio": "Urretxu",
+    "direccion": "Ipeñarrieta Kalea, 4, Izq Y Dcha, 20700 Urretxu, Gipuzkoa",
+    "telefono": "912 17 04 53"
+  },
+  {
+    "id": 1229,
+    "nombre": "CLAREL",
+    "cadena": "Clarel",
+    "sector_cadena": "Cuidado Personal y Droguería",
+    "municipio": "Lazkao",
+    "direccion": "Elosegi Kalea, 22-24, 20210 Lazkao, Gipuzkoa",
+    "telefono": "919 03 22 03"
+  },
+  {
+    "id": 1181,
+    "nombre": "Oficina Rural de Correos",
+    "cadena": "Correos / Citypaq",
+    "sector_cadena": "Logística y Envíos",
+    "municipio": "Idiazabal",
+    "direccion": "Nagusia Plaza, 1, 20213 Idiazabal, Gipuzkoa",
+    "telefono": ""
+  },
+  {
+    "id": 1307,
+    "nombre": "Oficina de Correos y Citypaq",
+    "cadena": "Correos / Citypaq",
+    "sector_cadena": "Logística y Envíos",
+    "municipio": "Lazkao",
+    "direccion": "Elosegi Kalea, 19, 20210 Lazkao, Gipuzkoa",
+    "telefono": "943 88 41 11"
+  },
+  {
+    "id": 303,
+    "nombre": "Euskaltel",
+    "cadena": "Euskaltel",
+    "sector_cadena": "Telecomunicaciones",
+    "municipio": "Urretxu",
+    "direccion": "Labeaga Kalea, 72, 20700 Urretxu, Gipuzkoa",
+    "telefono": "943 53 25 08"
+  },
+  {
+    "id": 660,
+    "nombre": "Tienda Orange",
+    "cadena": "Tienda Orange",
+    "sector_cadena": "Telecomunicaciones",
+    "municipio": "Zumarraga",
+    "direccion": "Piedad Kalea, 16, 20700 Zumarraga, Gipuzkoa",
+    "telefono": "665 60 03 28"
+  },
+  {
+    "id": 847,
+    "nombre": "Clínica Dental Vitaldent",
+    "cadena": "Vitaldent",
+    "sector_cadena": "Salud y Clínicas Dentales",
+    "municipio": "Beasain",
+    "direccion": "Kale Nagusia Kalea, 37, 20200 Beasain, Gipuzkoa",
+    "telefono": "943 59 53 41"
+  },
+  {
+    "id": 1299,
+    "nombre": "Merkal Calzados",
+    "cadena": "Merkal Calzados",
+    "sector_cadena": "Moda y Calzado",
+    "municipio": "Lazkao",
+    "direccion": "Lugar Harizti, Industrialdea, 9, 20212 Ihurre, Gipuzkoa",
+    "telefono": "943 04 10 09"
+  },
+  {
+    "id": 1347,
+    "nombre": "Alain Afflelou Óptico Olaberria, Guipuzcoa",
+    "cadena": "Alain Afflelou Óptico",
+    "sector_cadena": "Salud y Óptica",
+    "municipio": "Olaberria",
+    "direccion": "C/ Arizti Industrialdea, 1, local 7, 20212 Olaberria, Gipuzkoa",
+    "telefono": "943 88 12 95"
+  },
+  {
+    "id": 1367,
+    "nombre": "Forum Sport GOIERRI",
+    "cadena": "Forum Sport",
+    "sector_cadena": "Deportes y Ocio",
+    "municipio": "Olaberria",
+    "direccion": "Harizti Ind, 2, 20212 Olaberria, Gipuzkoa",
+    "telefono": "943 88 52 18"
+  }
+]

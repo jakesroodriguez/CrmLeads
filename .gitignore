@@ -1,31 +1,32 @@
 # Sistema y temporales
 .DS_Store
 Thumbs.db
+desktop.ini
 *.tmp
 *.log
 .vscode/
 .idea/
 
-# Scripts y datasets auxiliares
-__pycache__/
-*.py
-*.ps1
-*.bat
+# FOTOS Y DOCUMENTOS PESADOS (1.37 GB - EXCLUIDOS PARA PROTEGER EL REPOSITORIO)
+*LeadsLibro*
+*LeadsLibro/**
+*.jpg
+*.jpeg
+*.JPG
+*.JPEG
+*.ARW
+*.mp4
+*.webm
 *.pdf
-*.csv
-crm_uzl.html
-leads_uzl_data.js
-GUIA_PROSPECCION_IA.md
-backups_previos/
-extracted_pages/
-ocr_results/
-*backup*.*
+
+# COPIAS DE SEGURIDAD Y ARCHIVOS TEMPORALES
+*Copias_de_Seguridad*
+*Copias_de_Seguridad/**
+*backup*
+*backups_previos*
+*extracted_pages*
+*ocr_results*
+__pycache__/
+*.pyc
 bitartean_stores.xml
 gmaps_resp.html
-
-# Archivos JSON auxiliares (excepto vercel.json)
-cadenas_*.json
-extracted_*.json
-leads_*.json
-sector_*.json
-analysis_*.json

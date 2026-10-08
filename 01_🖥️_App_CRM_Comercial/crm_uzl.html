@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urola Garaia AI CRM - Prospección Comercial</title>
+  <link rel="stylesheet" href="crm_styles.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="crm-sidebar">
+    <div class="crm-brand">
+      <div class="brand-icon">⚡</div>
+      <div class="brand-text">
+        <h2>Urola Garaia AI CRM</h2>
+        <p>Prospección Local</p>
+      </div>
+    </div>
+
+    <nav class="crm-nav">
+      <a class="nav-item active" data-tab="table">
+        <span class="icon">📋</span>
+        <span>Tabla de Leads</span>
+        <span class="nav-badge" id="badgeTotalTable">683</span>
+      </a>
+      <a class="nav-item" data-tab="kanban">
+        <span class="icon">📊</span>
+        <span>Embudo (Kanban)</span>
+      </a>
+      <a class="nav-item" data-tab="scripts">
+        <span class="icon">💬</span>
+        <span>Guiones y Pitches</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      
+      <div style="margin: 12px 0; padding: 8px 12px; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 8px; font-size: 12px;">
+        <span style="color: #60a5fa; font-weight: 600;">Base Activa:</span> UZL (683 leads)<br>
+        <a href="crm.html" style="color: #93c5fd; text-decoration: underline; margin-top: 4px; display: inline-block;">Ver base general Goierri (567) &rarr;</a>
+      </div>
+<div style="font-weight: 600; color: #fff;">Urretxu - Zumarraga - Legazpi</div>
+      <div>3 Municipios • 683 Comercios</div>
+      <div style="font-size: 11px; margin-top: 6px; color: #64748b;">Datos persistentes en local</div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="crm-main">
+    <!-- Header -->
+    <header class="crm-header">
+      <div class="header-title">
+        <h1>Urretxu, Zumarraga & Legazpi Leads CRM</h1>
+        <p>Gestión de clientes potenciales para venta de servicios de Inteligencia Artificial</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-outline" id="exportCsvBtn" title="Exportar vista filtrada a Excel/CSV">
+          <span>📥</span> Exportar CSV
+        </button>
+      </div>
+    </header>
+
+    <!-- KPI Summary Cards -->
+    <section class="kpi-container">
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <h3>Total Leads</h3>
+          <div class="kpi-value" id="kpiTotal">567</div>
+          <div class="kpi-sub">Comercios verificados</div>
+        </div>
+        <div class="kpi-icon icon-blue">🏢</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <h3>Alto Potencial IA</h3>
+          <div class="kpi-value" id="kpiAlto">370</div>
+          <div class="kpi-sub">65.3% del directorio</div>
+        </div>
+        <div class="kpi-icon icon-purple">🚀</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <h3>Contactados</h3>
+          <div class="kpi-value" id="kpiContactados">0</div>
+          <div class="kpi-sub">Pipeline activo</div>
+        </div>
+        <div class="kpi-icon icon-amber">📞</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <h3>Clientes Ganados</h3>
+          <div class="kpi-value" id="kpiGanados">0</div>
+          <div class="kpi-sub">Cierres completados</div>
+        </div>
+        <div class="kpi-icon icon-green">🏆</div>
+      </div>
+    </section>
+
+    <!-- VIEW 1: DATA TABLE -->
+    <section class="view-content" id="viewTable">
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Buscar por nombre, calle, teléfono o servicio de IA...">
+        </div>
+
+        <select class="filter-select" id="filterMunicipio">
+          <option value="">Todos los Municipios</option>
+        </select>
+
+        <select class="filter-select" id="filterSector">
+          <option value="">Todos los Sectores</option>
+        </select>
+
+        <select class="filter-select" id="filterPotencial">
+          <option value="">Cualquier Potencial</option>
+          <option value="Alto">Potencial Alto</option>
+          <option value="Medio">Potencial Medio</option>
+          <option value="Bajo">Potencial Bajo</option>
+        </select>
+
+        <select class="filter-select" id="filterStatus">
+          <option value="">Cualquier Estado CRM</option>
+          <option value="Nuevo">Nuevo</option>
+          <option value="Contactado">Contactado</option>
+          <option value="Interesado">Interesado</option>
+          <option value="Propuesta">Propuesta</option>
+          <option value="Ganado">Ganado</option>
+          <option value="Descartado">Descartado</option>
+        </select>
+      </div>
+
+      <!-- Table Wrapper -->
+      <div class="table-wrapper">
+        <div class="table-header-info">
+          <span class="table-stats" id="tableStats">Cargando comercios...</span>
+          <div style="font-size: 12px; color: var(--text-muted);">
+            💡 Haz clic en cualquier comercio para abrir su ficha completa y notas.
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="crm-table">
+            <thead>
+              <tr>
+                <th data-sort="id">ID</th>
+                <th data-sort="nombre">Nombre Comercial / Dirección</th>
+                <th data-sort="municipio">Municipio</th>
+                <th data-sort="sector">Sector</th>
+                <th data-sort="potencial_ia">Potencial IA</th>
+                <th data-sort="crm_status">Estado CRM</th>
+                <th style="cursor: default;">Acciones Rápidas</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Filas renderizadas dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Bar -->
+        <div class="pagination-bar">
+          <span id="paginationInfo" style="font-size: 13px; color: var(--text-muted);">Página 1</span>
+          <div class="pagination-controls">
+            <button class="page-btn" id="prevPageBtn" disabled>← Anterior</button>
+            <button class="page-btn" id="nextPageBtn">Siguiente →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: KANBAN PIPELINE -->
+    <section class="view-content" id="viewKanban" style="display: none;">
+      <div class="kanban-board">
+        <!-- Columna Nuevo -->
+        <div class="kanban-column">
+          <div class="kanban-column-header">
+            <span>⚪ Por Contactar</span>
+            <span class="column-count" id="countNuevo">0</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColNuevo"></div>
+        </div>
+
+        <!-- Columna Contactado -->
+        <div class="kanban-column">
+          <div class="kanban-column-header" style="border-top: 3px solid #3b82f6;">
+            <span>🔵 Contactado</span>
+            <span class="column-count" id="countContactado">0</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColContactado"></div>
+        </div>
+
+        <!-- Columna Interesado -->
+        <div class="kanban-column">
+          <div class="kanban-column-header" style="border-top: 3px solid #f59e0b;">
+            <span>🟡 Interesado / Demo</span>
+            <span class="column-count" id="countInteresado">0</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColInteresado"></div>
+        </div>
+
+        <!-- Columna Propuesta -->
+        <div class="kanban-column">
+          <div class="kanban-column-header" style="border-top: 3px solid #8b5cf6;">
+            <span>🟣 Propuesta Enviada</span>
+            <span class="column-count" id="countPropuesta">0</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColPropuesta"></div>
+        </div>
+
+        <!-- Columna Ganado -->
+        <div class="kanban-column">
+          <div class="kanban-column-header" style="border-top: 3px solid #10b981;">
+            <span>🟢 Ganado (Cliente)</span>
+            <span class="column-count" id="countGanado">0</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColGanado"></div>
+        </div>
+
+        <!-- Columna Descartado -->
+        <div class="kanban-column">
+          <div class="kanban-column-header" style="border-top: 3px solid #ef4444;">
+            <span>🔴 Descartado</span>
+            <span class="column-count" id="countDescartado">0</span>
+          </div>
+          <div class="kanban-cards" id="kanbanColDescartado"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: SCRIPTS & PITCHES -->
+    <section class="view-content" id="viewScripts" style="display: none;">
+      <div class="scripts-grid">
+        <!-- Script 1: Peluquerías Castellano -->
+        <div class="script-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3>📞 Peluquerías y Estética</h3>
+            <span class="script-tag">Castellano</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Enfoque: Llamadas perdidas mientras atienden en cabina o lavacabezas.</p>
+          <div class="script-body" id="scriptPeluEs">"Hola, buenos días. ¿Hablo con [Nombre del Salón]? Te llamo rápido porque sé que estarás con clientas. Soy [Tu Nombre], del Goierri, y ayudo a salones locales a resolver un problema diario: las llamadas de clientas que se pierden mientras tienes las manos ocupadas con tinte, tijeras o en cabina.
+
+Hemos desarrollado un asistente inteligente que contesta tu teléfono con voz natural y apunta las citas directamente en tu calendario a cualquier hora.
+
+¿Me permites que te envíe un audio de 1 minuto por WhatsApp para que escuches cómo suena gratis y sin compromiso?"</div>
+          <button class="btn btn-outline" style="width: 100%; margin-top: 14px;" data-copy-target="scriptPeluEs">
+            📋 Copiar Guión
+          </button>
+        </div>
+
+        <!-- Script 2: Peluquerías Euskera -->
+        <div class="script-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3>📞 Ile-apaindegiak eta Estetika</h3>
+            <span class="script-tag">Euskara</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Funtsezkoa Goierrin: konfiantza eta hurbiltasuna lortzeko.</p>
+          <div class="script-body" id="scriptPeluEu">"Kaixo, egun on! [Salón-aren Izena]-rekin hitz egiten dut? Bizkor deitzen dizut, bezeroekin lanean ariko zarela badakidalako. Nire izena [Zure Izena] da, Goierrikoa naiz, eta eskualdeko ile-apaindegiei laguntzen diet bezeroen deiak ez galtzen tintarekin edo lanean zaudeten bitartean.
+
+Ahots-laguntzaile adimendun bat garatu dugu: deiei modu naturalean erantzuten die euskaraz zein gaztelaniaz, eta hitzorduak zuzenean zure agendan erreserbatzen ditu, 24 orduz.
+
+Bidal diezazuket minutu bateko audio bat WhatsAppez, zure negoziorako nola funtzionatzen duen froga dezazun?"</div>
+          <button class="btn btn-outline" style="width: 100%; margin-top: 14px;" data-copy-target="scriptPeluEu">
+            📋 Kopiatu Gidoia
+          </button>
+        </div>
+
+        <!-- Script 3: WhatsApp Tiendas / Moda -->
+        <div class="script-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3>💬 Tiendas de Ropa, Calzado y Deportes</h3>
+            <span class="script-tag">WhatsApp</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Enfoque: Responder tallas, reservas por foto y catálogo 24/7.</p>
+          <div class="script-body" id="scriptModaWa">"Hola [Nombre del Comercio], ¡enhorabuena por vuestra tienda en [Municipio]!
+
+Os escribo desde [Tu Nombre] aquí en el Goierri. Muchos comercios locales nos comentan que pierden ventas porque las clientas ven ropa en escaparates o Instagram fuera de horario y no tienen tiempo de atender preguntas de tallas.
+
+Hemos creado un asistente de WhatsApp que permite a tus clientas consultar tallas, ver vuestra nueva colección y reservar prendas al instante, las 24 horas.
+
+Os he preparado una prueba de 2 minutos para que veáis cómo quedaría con vuestro nombre. ¿Queréis que os lo pase por aquí sin ningún compromiso? ¡Un saludo!"</div>
+          <button class="btn btn-outline" style="width: 100%; margin-top: 14px;" data-copy-target="scriptModaWa">
+            📋 Copiar Mensaje
+          </button>
+        </div>
+
+        <!-- Script 4: Alimentación / Obradores -->
+        <div class="script-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3>🥩 Carnicerías, Pescaderías y Panaderías</h3>
+            <span class="script-tag">WhatsApp / Llamada</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Enfoque: Pedidos previos matinales para evitar colas en mostrador.</p>
+          <div class="script-body" id="scriptAlimWa">"Kaixo [Nombre del Negocio]! Os escribo brevemente desde el Goierri.
+
+Sabemos que a primera hora y en fin de semana se forman colas en mostrador y no da tiempo a coger el teléfono para apuntar encargos.
+
+Estamos instalando en comercios de la comarca un sistema sencillo de WhatsApp donde vuestros clientes pueden enviaros su encargo de carne/pescado limpio/tartas por texto o audio, y os llega organizado en una lista clara lista para preparar.
+
+¿Os interesaría ver una prueba rápida de cómo funciona? Os paso un ejemplo en un minuto. Mila esker!"</div>
+          <button class="btn btn-outline" style="width: 100%; margin-top: 14px;" data-copy-target="scriptAlimWa">
+            📋 Copiar Mensaje
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lead Detail Modal / Slide-over -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h2 id="modalTitle">Nombre del Comercio</h2>
+          <p id="modalSubtitle">Sector • Municipio</p>
+          <div id="modalBadges" style="margin-top: 10px; display: flex; gap: 8px;"></div>
+        </div>
+        <button class="close-btn" id="modalCloseBtn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Contact Details -->
+        <div class="detail-section">
+          <h4>📞 Datos de Contacto y Ubicación</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px;">
+            <div>
+              <div style="font-size: 11px; color: var(--text-muted);">Teléfono Principal:</div>
+              <div id="modalPhone" style="font-size: 16px; font-weight: 700; color: var(--primary); margin-top: 2px;"></div>
+            </div>
+            <div>
+              <div style="font-size: 11px; color: var(--text-muted);">Dirección Física:</div>
+              <div id="modalAddress" style="font-size: 13px; font-weight: 600; margin-top: 2px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Opportunity -->
+        <div class="detail-section" style="background: #f0fdf4; border-color: #bbf7d0;">
+          <h4 style="color: #166534;">🤖 Solución de IA Recomendada</h4>
+          <div id="modalService" style="font-weight: 700; color: #14532d; font-size: 14px;"></div>
+          
+          <div style="font-size: 11px; color: #166534; margin-top: 10px; font-weight: 600;">Pitch Gancho Sugerido:</div>
+          <div class="pitch-box" id="modalPitch"></div>
+
+          <div style="display: flex; gap: 8px; margin-top: 10px;">
+            <button class="btn btn-outline" style="font-size: 12px; padding: 6px 12px;" id="modalCopyPitchBtn">
+              📋 Copiar Pitch (Castellano)
+            </button>
+            <button class="btn btn-outline" style="font-size: 12px; padding: 6px 12px;" id="modalCopyEuPitchBtn">
+              📋 Copiar Pitch (Euskara)
+            </button>
+          </div>
+        </div>
+
+        <!-- CRM Status & Notes -->
+        <div class="detail-section">
+          <h4>📝 Estado Comercial y Notas Privadas</h4>
+          <div style="margin-bottom: 12px;">
+            <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px;">Cambiar Estado:</label>
+            <select class="filter-select" id="modalStatusSelect" style="width: 100%;">
+              <option value="Nuevo">⚪ Nuevo (Por Contactar)</option>
+              <option value="Contactado">🔵 Contactado</option>
+              <option value="Interesado">🟡 Interesado / Enviada Demo</option>
+              <option value="Propuesta">🟣 Propuesta Presentada</option>
+              <option value="Ganado">🟢 Ganado (Cliente Cerrado)</option>
+              <option value="Descartado">🔴 Descartado / No Interesado</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px;">Notas de Seguimiento (se guardan automáticamente):</label>
+            <textarea class="notes-area" id="modalNotes" placeholder="Escribe aquí notas de la llamada, fecha para volver a llamar, persona de contacto..."></textarea>
+          </div>
+        </div>
+
+        <!-- Modal Actions -->
+        <div class="modal-actions">
+          <button class="btn btn-success" id="modalWhatsappBtn" style="flex: 1;">
+            <span>💬</span> Abrir WhatsApp con Mensaje Pre-redactado
+          </button>
+          <a href="#" class="btn btn-primary" id="modalCallBtn">
+            <span>📞</span> Llamar Ahora
+          </a>
+          <a href="#" target="_blank" class="btn btn-outline" id="modalMapsBtn" title="Ver ubicación en Google Maps">
+            <span>📍</span> Ver en Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="crm-toast" id="toast">Acción completada</div>
+
+  <!-- Scripts -->
+  <script src="leads_uzl_data.js"></script>
+  <script src="crm_app.js"></script>
+</body>
+</html>

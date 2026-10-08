@@ -1,0 +1,56 @@
+{
+  "sector_counts": {
+    "Comercio y Servicios Generales": 133,
+    "Hostelería y Restauración": 100,
+    "Alimentación y Frescos": 75,
+    "Moda, Calzado y Complementos": 67,
+    "Salud y Clínicas": 43,
+    "Comercio Especializado, Ocio y Cultura": 36,
+    "Belleza y Cuidado Personal": 66,
+    "Hogar, Reformas y Gremios": 56,
+    "Servicios Profesionales y Asesorías": 49,
+    "Industria y Fabricación": 42,
+    "Automoción y Talleres": 16
+  },
+  "town_sector": {
+    "Legazpi": {
+      "Comercio y Servicios Generales": 61,
+      "Hostelería y Restauración": 30,
+      "Alimentación y Frescos": 18,
+      "Moda, Calzado y Complementos": 17,
+      "Salud y Clínicas": 16,
+      "Comercio Especializado, Ocio y Cultura": 12,
+      "Belleza y Cuidado Personal": 22,
+      "Hogar, Reformas y Gremios": 9,
+      "Servicios Profesionales y Asesorías": 12,
+      "Industria y Fabricación": 17,
+      "Automoción y Talleres": 5
+    },
+    "Urretxu": {
+      "Hostelería y Restauración": 31,
+      "Comercio y Servicios Generales": 41,
+      "Alimentación y Frescos": 23,
+      "Servicios Profesionales y Asesorías": 18,
+      "Belleza y Cuidado Personal": 20,
+      "Industria y Fabricación": 14,
+      "Hogar, Reformas y Gremios": 21,
+      "Salud y Clínicas": 12,
+      "Moda, Calzado y Complementos": 9,
+      "Automoción y Talleres": 3,
+      "Comercio Especializado, Ocio y Cultura": 6
+    },
+    "Zumarraga": {
+      "Moda, Calzado y Complementos": 41,
+      "Salud y Clínicas": 15,
+      "Servicios Profesionales y Asesorías": 19,
+      "Alimentación y Frescos": 34,
+      "Automoción y Talleres": 8,
+      "Industria y Fabricación": 11,
+      "Hogar, Reformas y Gremios": 26,
+      "Belleza y Cuidado Personal": 24,
+      "Comercio y Servicios Generales": 31,
+      "Hostelería y Restauración": 39,
+      "Comercio Especializado, Ocio y Cultura": 18
+    }
+  }
+}
